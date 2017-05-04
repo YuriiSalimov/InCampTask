@@ -26,30 +26,30 @@ public class FigureGeneratorTest {
 
     @Test
     public void createFigures() throws Exception {
-        List<Figure> figures = generator.createFigures(FIGURE_NUMBER);
+        List<Figure> figures = generator.getFigures(FIGURE_NUMBER);
         Assert.assertTrue(figures.size() == FIGURE_NUMBER);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void createFiguresWithNegativeNumber() throws Exception {
-        generator.createFigures(-FIGURE_NUMBER);
+    @Test
+    public void createFiguresWithNegativeNumber() {
+        Assert.assertTrue(generator.getFigures(-FIGURE_NUMBER).isEmpty());
     }
 
     @Test
     public void createCircle() throws Exception {
-        Circle circle = generator.createCircle();
+        Circle circle = generator.getCircle();
         Assert.assertNotNull(circle);
     }
 
     @Test
     public void createPoint() throws Exception {
-        Point point = generator.createPoint();
+        Point point = generator.getPoint();
         Assert.assertNotNull(point);
     }
 
     @Test
     public void createRectangle() throws Exception {
-        Rectangle rectangle = generator.createRectangle();
+        Rectangle rectangle = generator.getRectangle();
         Assert.assertNotNull(rectangle);
     }
 
@@ -57,7 +57,7 @@ public class FigureGeneratorTest {
     public void createTriangle() throws Exception {
         Triangle triangle;
         for (int i = 0; i < FIGURE_NUMBER; i++) {
-            triangle = generator.createTriangle();
+            triangle = generator.getTriangle();
             Assert.assertNotNull(triangle);
             Assert.assertTrue(triangle.isTriangle());
         }

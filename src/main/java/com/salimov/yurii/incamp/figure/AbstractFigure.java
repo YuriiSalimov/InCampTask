@@ -42,7 +42,5 @@ public abstract class AbstractFigure implements Figure {
      * @return A hash code value for this object.
      */
     @Override
-    public int hashCode() {
-        return (int) (getArea() + getPerimeter());
-    }
+    public abstract int hashCode();
 }

@@ -17,21 +17,24 @@ public class FigurePrinter implements Printer {
     /**
      * Analyzer instance for analyzing a geometric figures.
      */
-    private Analyzer analyzer;
+    private final Analyzer analyzer;
 
     /**
      * Constructor.
      *
-     * @param analyzer a Analyzer instance for analyzing a geometric figures.
+     * @param analyzer the Analyzer instance for analyzing a geometric figures.
      */
-    public FigurePrinter(Analyzer analyzer) {
+    public FigurePrinter(Analyzer analyzer) throws IllegalArgumentException {
+        if (analyzer == null) {
+            throw new IllegalArgumentException("Incoming Analyzer is null!");
+        }
         this.analyzer = analyzer;
     }
 
     /**
      * Prints a incoming geometric figures in the console.
      *
-     * @param figures a figure list to print.
+     * @param figures the figure list to print.
      */
     @Override
     public void printlnAll(List<Figure> figures) {
@@ -42,7 +45,7 @@ public class FigurePrinter implements Printer {
     /**
      * Prints a incoming geometric figure in the console.
      *
-     * @param figure a figure to print.
+     * @param figure the figure to print.
      */
     @Override
     public void println(Figure figure) {
@@ -52,48 +55,48 @@ public class FigurePrinter implements Printer {
     /**
      * Prints a geometric figures with a maximum area.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      */
     @Override
     public void printlnWithMaxArea(List<Figure> figures) {
         System.out.println("\nFigure with max area:");
-        Figure figureWithMaxArea = analyzer.getWithMaxArea(figures);
+        Figure figureWithMaxArea = this.analyzer.getWithMaxArea(figures);
         System.out.println(figureWithMaxArea);
     }
 
     /**
      * Prints a geometric figures with a minimum area.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      */
     @Override
     public void printlnWithMinArea(List<Figure> figures) {
         System.out.println("\nFigure with min area:");
-        Figure figureWithMinArea = analyzer.getWithMinArea(figures);
+        Figure figureWithMinArea = this.analyzer.getWithMinArea(figures);
         System.out.println(figureWithMinArea);
     }
 
     /**
      * Prints a geometric figures with a maximum perimeter.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      */
     @Override
     public void printlnWithMaxPerimeter(List<Figure> figures) {
         System.out.println("\nFigure with max perimeter:");
-        Figure figureWithMaxPerimeter = analyzer.getWithMaxPerimeter(figures);
+        Figure figureWithMaxPerimeter = this.analyzer.getWithMaxPerimeter(figures);
         System.out.println(figureWithMaxPerimeter);
     }
 
     /**
      * Prints a geometric figures with a minimum perimeter.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      */
     @Override
     public void printlnWithMinPerimeter(List<Figure> figures) {
         System.out.println("\nFigure with min perimeter:");
-        Figure figureWithMinPerimeter = analyzer.getWithMinPerimeter(figures);
+        Figure figureWithMinPerimeter = this.analyzer.getWithMinPerimeter(figures);
         System.out.println(figureWithMinPerimeter);
     }
 
@@ -111,7 +114,7 @@ public class FigurePrinter implements Printer {
     /**
      * Draws a incoming geometric figure in the console.
      *
-     * @param figure a figure to draw.
+     * @param figure the figure to draw.
      */
     @Override
     public void draw(Drawable figure) {
@@ -121,7 +124,7 @@ public class FigurePrinter implements Printer {
     /**
      * Prints and draws a incoming geometric figures in the console.
      *
-     * @param figures a figure list to print and draw.
+     * @param figures the figure list to print and draw.
      */
     @Override
     public void printAndDrawAll(List<Figure> figures) {
@@ -132,7 +135,7 @@ public class FigurePrinter implements Printer {
     /**
      * Prints and draws a incoming geometric figure in the console.
      *
-     * @param figure a figure to print and draw.
+     * @param figure the figure to print and draw.
      */
     @Override
     public void printAndDraw(Figure figure) {

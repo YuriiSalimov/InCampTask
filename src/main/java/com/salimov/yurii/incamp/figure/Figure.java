@@ -12,21 +12,21 @@ public interface Figure extends Drawable {
     /**
      * Calculates and returns a figure area.
      *
-     * @return a figure area.
+     * @return the figure area.
      */
     double getArea();
 
     /**
      * Calculates and returns a figure perimeter.
      *
-     * @return a figure perimeter.
+     * @return the figure perimeter.
      */
     double getPerimeter();
 
     /**
      * Returns a figure name.
      *
-     * @return a figure name
+     * @return the figure name
      */
     String getName();
 }

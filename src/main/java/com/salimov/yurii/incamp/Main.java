@@ -1,9 +1,8 @@
 package com.salimov.yurii.incamp;
 
-import com.salimov.yurii.incamp.figure.*;
+import com.salimov.yurii.incamp.figure.Figure;
 import com.salimov.yurii.incamp.service.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,17 +19,17 @@ public class Main {
      * @param args a incoming parameters.
      */
     public static void main(String[] args) {
-        Generator generator = createGenerator();
+        Generator generator = getGenerator();
         int figuresNumber = 10;
-        List<Figure> figures = generator.createFigures(figuresNumber);
-        
-        Printer printer = createPrinter();
+        List<Figure> figures = generator.getFigures(figuresNumber);
+
+        Printer printer = getPrinter();
         printer.printlnAll(figures);
         printer.printlnWithMaxArea(figures);
         printer.printlnWithMinArea(figures);
         printer.printlnWithMaxPerimeter(figures);
         printer.printlnWithMinPerimeter(figures);
-        printer.printAndDrawAll(new ArrayList<>(figures));
+        printer.printAndDrawAll(figures);
     }
 
     /**
@@ -39,7 +38,7 @@ public class Main {
      *
      * @return a new Generator.
      */
-    private static Generator createGenerator() {
+    private static Generator getGenerator() {
         int maxCoordinate = 10;
         return new FigureGenerator(maxCoordinate);
     }
@@ -50,8 +49,18 @@ public class Main {
      *
      * @return a new Printer.
      */
-    private static Printer createPrinter() {
-        Analyzer analyzer = new FigureAnalyzer();
+    private static Printer getPrinter() {
+        Analyzer analyzer = getAnalyzer();
         return new FigurePrinter(analyzer);
+    }
+
+    /**
+     * Creates and returns a new Printer instance
+     * for analyzing an incoming figures.
+     *
+     * @return a new Analyzer.
+     */
+    private static Analyzer getAnalyzer() {
+        return new FigureAnalyzer();
     }
 }

@@ -28,7 +28,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
     /**
      * Constructor.
      *
-     * @param radius a radius for a new circle.
+     * @param radius the radius for a new circle.
      */
     public CircleImpl(double radius) {
         this();
@@ -39,18 +39,18 @@ public class CircleImpl extends AbstractFigure implements Circle {
      * Calculates and returns a circle area.
      * circle area = PI * radius ^ 2
      *
-     * @return a circle area.
+     * @return the circle area.
      */
     @Override
     public double getArea() {
-        return Math.PI * radius * radius;
+        return Math.PI * getRadius() * getRadius();
     }
 
     /**
      * Calculates and returns a circle perimeter.
      * circle perimeter = 2 * PI * radius = PI * diameter
      *
-     * @return a circle perimeter.
+     * @return the circle perimeter.
      */
     @Override
     public double getPerimeter() {
@@ -65,7 +65,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
     @Override
     public String toString() {
         return super.toString() +
-                ", radius = " + radius +
+                ", radius = " + getRadius() +
                 ", diameter = " + getDiameter();
     }
 
@@ -81,7 +81,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
         boolean result = super.equals(object);
         if (result) {
             Circle other = (Circle) object;
-            result = (this.radius == other.getRadius());
+            result = (this.getRadius() == other.getRadius());
         }
         return result;
     }
@@ -95,27 +95,29 @@ public class CircleImpl extends AbstractFigure implements Circle {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp = Double.doubleToLongBits(radius);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        long temp = Double.doubleToLongBits(getRadius());
+        return (int) (temp ^ (temp >>> 32));
     }
 
     /**
      * Returns a circle radius.
      *
-     * @return a circle radius.
+     * @return the circle radius.
      */
     @Override
     public double getRadius() {
-        return radius;
+        return this.radius;
     }
 
     /**
      * Sets a new radius for a circle.
      * If input radius is negative, then sets zero.
+     * <pre>
+     *     setRadius(10) - sets 10
+     *     setRadius(-10) - sets 0
+     * </pre>
      *
-     * @param radius a new circle radius.
+     * @param radius the new circle radius.
      */
     @Override
     public void setRadius(double radius) {
@@ -125,19 +127,23 @@ public class CircleImpl extends AbstractFigure implements Circle {
     /**
      * Calculates and returns a circle diameter.
      *
-     * @return a circle diameter.
+     * @return the circle diameter.
      */
     @Override
     public double getDiameter() {
-        return 2 * radius;
+        return 2 * getRadius();
     }
 
     /**
      * Sets a new diameter for a circle.
      * In method calculates and sets a circle radius:
      * radius = diameter / 2
+     * <pre>
+     *     setDiameter(10) - sets radius 5
+     *     setDiameter(-10) - sets 0
+     * </pre>
      *
-     * @param diameter a new circle diameter.
+     * @param diameter the new circle diameter.
      */
     @Override
     public void setDiameter(double diameter) {
@@ -147,17 +153,17 @@ public class CircleImpl extends AbstractFigure implements Circle {
     /**
      * Calculates and returns a circle center point.
      *
-     * @return a circle center point.
+     * @return the circle center point.
      */
     @Override
     public Point getCentre() {
-        return new PointImpl(radius, radius);
+        return new PointImpl(getRadius(), getRadius());
     }
 
     /**
      * Returns a circle name.
      *
-     * @return a circle name
+     * @return the circle name
      */
     @Override
     public String getName() {
@@ -189,18 +195,22 @@ public class CircleImpl extends AbstractFigure implements Circle {
     /**
      * Checks if a point is in the circle.
      *
-     * @param point a point to check.
-     * @return true if incoming point is in a circle,
+     * @param point the point to check.
+     * @return true if the incoming point is in this circle,
      * false otherwise.
      */
     private boolean isPointInCircle(Point point) {
-        return calculateLengthToCentre(point) <= radius;
+        return calculateLengthToCentre(point) <= getRadius();
     }
 
     /**
      * Calculates and returns a length from incoming point to circle centre.
+     * Length to circle centre is
+     * L = sqrt[X^2 + Y^2],
+     * where X - length of a projection on the x-axis,
+     * Y - length of a projection on the y-axis.
      *
-     * @param point a point to check.
+     * @param point the point to check.
      * @return a length from incoming point to circle centre.
      */
     private double calculateLengthToCentre(Point point) {

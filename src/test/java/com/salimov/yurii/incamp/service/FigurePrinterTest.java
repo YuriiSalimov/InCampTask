@@ -25,7 +25,12 @@ public class FigurePrinterTest {
         int maxCoordinate = 10;
         int figureNumber = 10;
         Generator generator = new FigureGenerator(maxCoordinate);
-        figures = generator.createFigures(figureNumber);
+        figures = generator.getFigures(figureNumber);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructorNullParameter() throws Exception {
+        new FigurePrinter(null);
     }
 
     @Test

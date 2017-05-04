@@ -33,8 +33,8 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Constructor.
      *
-     * @param width  a width for a new rectangle.
-     * @param height a height for a new rectangle.
+     * @param width  the width for a new rectangle.
+     * @param height the height for a new rectangle.
      */
     public RectangleImpl(double width, double height) {
         this();
@@ -46,22 +46,22 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      * Calculates and returns a rectangle area.
      * rectangle area = width * height
      *
-     * @return a rectangle area.
+     * @return the rectangle area.
      */
     @Override
     public double getArea() {
-        return this.width * this.height;
+        return getWidth() * getHeight();
     }
 
     /**
      * Calculates and returns a rectangle perimeter.
      * rectangle perimeter = 2 * (width + height)
      *
-     * @return a rectangle perimeter.
+     * @return the rectangle perimeter.
      */
     @Override
     public double getPerimeter() {
-        return 2 * (this.width + this.height);
+        return 2 * (getWidth() + getHeight());
     }
 
     /**
@@ -72,8 +72,8 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     @Override
     public String toString() {
         return super.toString() +
-                ", width = " + this.width +
-                ", height = " + this.height;
+                ", width = " + getWidth() +
+                ", height = " + this.getHeight();
     }
 
     /**
@@ -88,8 +88,8 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
         boolean result = super.equals(object);
         if (result) {
             Rectangle other = (Rectangle) object;
-            result = (this.width == other.getWidth()) &&
-                    (this.height == other.getHeight());
+            result = (this.getWidth() == other.getWidth()) &&
+                    (this.getHeight() == other.getHeight());
         }
         return result;
     }
@@ -103,10 +103,9 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp = Double.doubleToLongBits(this.width);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.height);
+        long temp = Double.doubleToLongBits(getWidth());
+        int result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getHeight());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -114,7 +113,7 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Returns a rectangle width.
      *
-     * @return a rectangle width.
+     * @return the rectangle width.
      */
     @Override
     public double getWidth() {
@@ -124,8 +123,12 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Sets a new width for a rectangle.
      * If input width is negative, then sets zero.
+     * <pre>
+     *     setWidth(10) - sets 10
+     *     setWidth(-10) - sets 0
+     * </pre>
      *
-     * @param width a new rectangle width.
+     * @param width the new rectangle width.
      */
     @Override
     public void setWidth(double width) {
@@ -135,7 +138,7 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Returns a rectangle height.
      *
-     * @return a rectangle height.
+     * @return the rectangle height.
      */
     @Override
     public double getHeight() {
@@ -145,8 +148,12 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Sets a new height for a rectangle.
      * If input height is negative, then sets zero.
+     * <pre>
+     *     setHeight(10) - sets 10
+     *     setHeight(-10) - sets 0
+     * </pre>
      *
-     * @param height a new rectangle height.
+     * @param height the new rectangle height.
      */
     @Override
     public void setHeight(double height) {
@@ -157,7 +164,7 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      * Calculates and returns a point A of a rectangle.
      * The coordinates of the point A is (0, 0).
      *
-     * @return a point A of a rectangle.
+     * @return the point A of a rectangle.
      */
     @Override
     public Point getPointA() {
@@ -168,33 +175,33 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      * Calculates and returns a point B of a rectangle.
      * The coordinates of the point B is (0, rectangle width).
      *
-     * @return a point B of a rectangle.
+     * @return the point B of a rectangle.
      */
     @Override
     public Point getPointB() {
-        return new PointImpl(0, width);
+        return new PointImpl(0, getWidth());
     }
 
     /**
      * Calculates and returns a point C of a rectangle.
      * The coordinates of the point C is (rectangle height, rectangle width).
      *
-     * @return a point C of a rectangle.
+     * @return the point C of a rectangle.
      */
     @Override
     public Point getPointC() {
-        return new PointImpl(height, width);
+        return new PointImpl(getHeight(), getWidth());
     }
 
     /**
      * Calculates and returns a point D of a rectangle.
      * The coordinates of the point D is (rectangle height, 0).
      *
-     * @return a point D of a rectangle.
+     * @return the point D of a rectangle.
      */
     @Override
     public Point getPointD() {
-        return new PointImpl(height, 0);
+        return new PointImpl(getHeight(), 0);
     }
 
     /**
@@ -203,8 +210,8 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     @Override
     public void draw() {
         Point point = new PointImpl();
-        for (int abscissa = 0; abscissa <= width; abscissa++) {
-            for (int ordinate = 0; ordinate <= height; ordinate++) {
+        for (int abscissa = 0; abscissa <= getWidth(); abscissa++) {
+            for (int ordinate = 0; ordinate <= getHeight(); ordinate++) {
                 point.draw();
             }
             System.out.println();

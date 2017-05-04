@@ -12,28 +12,28 @@ public interface Point extends Figure {
     /**
      * Returns an abscissa coordinate of a point.
      *
-     * @return an abscissa coordinate of a point.
+     * @return the abscissa coordinate of a point.
      */
     double getAbscissa();
 
     /**
      * Sets a new abscissa coordinate for a point.
      *
-     * @param abscissa a new abscissa coordinate.
+     * @param abscissa the new abscissa coordinate.
      */
     void setAbscissa(double abscissa);
 
     /**
      * Returns a point ordinate.
      *
-     * @return a point ordinate.
+     * @return the point ordinate.
      */
     double getOrdinate();
 
     /**
      * Sets a new ordinate coordinate for a point.
      *
-     * @param ordinate a new ordinate coordinate.
+     * @param ordinate the new ordinate coordinate.
      */
     void setOrdinate(double ordinate);
 }

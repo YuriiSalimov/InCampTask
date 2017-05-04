@@ -16,36 +16,36 @@ public interface Generator {
     /**
      * Creates and returns a list of a geometric figures.
      *
-     * @param number a figures number.
+     * @param number the figures number.
      * @return a list of a geometric figures.
      */
-    List<Figure> createFigures(int number);
+    List<Figure> getFigures(int number);
 
     /**
      * Creates and returns a Circle geometric figure.
      *
      * @return a Circle geometric figure.
      */
-    Circle createCircle();
+    Circle getCircle();
 
     /**
      * Creates and returns a Point geometric figure.
      *
      * @return a Point geometric figure.
      */
-    Point createPoint();
+    Point getPoint();
 
     /**
      * Creates and returns a Rectangle geometric figure.
      *
      * @return a Rectangle geometric figure.
      */
-    Rectangle createRectangle();
+    Rectangle getRectangle();
 
     /**
      * Creates and returns a Triangle geometric figure.
      *
      * @return a Triangle geometric figure.
      */
-    Triangle createTriangle();
+    Triangle getTriangle();
 }

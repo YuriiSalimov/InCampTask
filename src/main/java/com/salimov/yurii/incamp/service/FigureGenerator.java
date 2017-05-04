@@ -38,7 +38,7 @@ public class FigureGenerator implements Generator {
     /**
      * Constructor.
      *
-     * @param maxCoordinate a maximum coordinate of
+     * @param maxCoordinate the maximum coordinate of
      *                      a geometric figures.
      */
     public FigureGenerator(int maxCoordinate) {
@@ -48,19 +48,17 @@ public class FigureGenerator implements Generator {
     /**
      * Creates and returns a list of a random geometric figures.
      *
-     * @param number a figures number.
+     * @param number the figures number.
      * @return a list of a random geometric figures.
-     * @throws IllegalArgumentException if incoming number is negative.
      */
     @Override
-    public List<Figure> createFigures(int number) throws IllegalArgumentException {
-        if (number < 0) {
-            throw new IllegalArgumentException("Number must be not negative!");
-        }
+    public List<Figure> getFigures(int number) {
         List<Figure> figures = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            Figure figure = getFigure(getNextInt());
-            figures.add(figure);
+        if (number > 0) {
+            for (int i = 0; i < number; i++) {
+                Figure figure = getFigure(getNextInt());
+                figures.add(figure);
+            }
         }
         return figures;
     }
@@ -72,7 +70,7 @@ public class FigureGenerator implements Generator {
      * @return a Circle geometric figure.
      */
     @Override
-    public Circle createCircle() {
+    public Circle getCircle() {
         int radius = getNextInt();
         return new CircleImpl(radius);
     }
@@ -84,7 +82,7 @@ public class FigureGenerator implements Generator {
      * @return a Point geometric figure.
      */
     @Override
-    public Point createPoint() {
+    public Point getPoint() {
         int abscissa = getNextInt();
         int ordinate = getNextInt();
         return new PointImpl(abscissa, ordinate);
@@ -97,7 +95,7 @@ public class FigureGenerator implements Generator {
      * @return a Rectangle geometric figure.
      */
     @Override
-    public Rectangle createRectangle() {
+    public Rectangle getRectangle() {
         int width = getNextInt();
         int height = getNextInt();
         return new RectangleImpl(width, height);
@@ -110,7 +108,7 @@ public class FigureGenerator implements Generator {
      * @return a Triangle geometric figure.
      */
     @Override
-    public Triangle createTriangle() {
+    public Triangle getTriangle() {
         Triangle triangle;
         do {
             int sideA = getNextInt();
@@ -127,14 +125,14 @@ public class FigureGenerator implements Generator {
      * @return a maximum coordinate of a geometric figures.
      */
     public int getMaxCoordinate() {
-        return maxCoordinate;
+        return this.maxCoordinate;
     }
 
     /**
      * Sets a new maximum coordinate of a geometric figures.
      * If input maximum coordinate is negative, then sets zero.
      *
-     * @param maxCoordinate a new maximum coordinate of a geometric figures.
+     * @param maxCoordinate the new maximum coordinate of a geometric figures.
      */
     public void setMaxCoordinate(int maxCoordinate) {
         this.maxCoordinate = (maxCoordinate > 0) ? maxCoordinate : 0;
@@ -145,23 +143,23 @@ public class FigureGenerator implements Generator {
      * with random fields by the number:
      * 0 - Circle, 1 - Point, 2 - Rectangle, 3 - Triangle
      *
-     * @param number a figure number.
+     * @param number the figure number.
      * @return a geometric figure.
      */
     private Figure getFigure(int number) {
         Figure figure;
         switch (number) {
         case 0:
-            figure = createCircle();
+            figure = getCircle();
             break;
         case 1:
-            figure = createPoint();
+            figure = getPoint();
             break;
         case 2:
-            figure = createRectangle();
+            figure = getRectangle();
             break;
         case 3:
-            figure = createTriangle();
+            figure = getTriangle();
             break;
         default:
             figure = getFigure(number % 4);
@@ -176,6 +174,6 @@ public class FigureGenerator implements Generator {
      * @return a random number.
      */
     private int getNextInt() {
-        return RANDOM.nextInt(maxCoordinate) + maxCoordinate;
+        return RANDOM.nextInt(getMaxCoordinate()) + getMaxCoordinate();
     }
 }

@@ -22,7 +22,7 @@ public class FigureAnalyzerTest {
         int maxCoordinate = 10;
         int figureNumber = 1000;
         Generator generator = new FigureGenerator(maxCoordinate);
-        figures = generator.createFigures(figureNumber);
+        figures = generator.getFigures(figureNumber);
         analyzer = new FigureAnalyzer();
     }
 

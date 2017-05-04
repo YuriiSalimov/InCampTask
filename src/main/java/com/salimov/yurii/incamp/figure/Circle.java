@@ -12,35 +12,35 @@ public interface Circle extends Figure {
     /**
      * Returns a circle radius.
      *
-     * @return a circle radius.
+     * @return the circle radius.
      */
     double getRadius();
 
     /**
      * Sets a new radius for a circle.
      *
-     * @param radius a new circle radius.
+     * @param radius the new circle radius.
      */
     void setRadius(double radius);
 
     /**
      * Calculates and returns a circle diameter.
      *
-     * @return a circle diameter.
+     * @return the circle diameter.
      */
     double getDiameter();
 
     /**
      * Sets a new diameter for a circle.
      *
-     * @param diameter a new circle diameter.
+     * @param diameter the new circle diameter.
      */
     void setDiameter(double diameter);
 
     /**
      * Calculates and returns a circle center point.
      *
-     * @return a circle center point.
+     * @return the circle center point.
      */
     Point getCentre();
 }

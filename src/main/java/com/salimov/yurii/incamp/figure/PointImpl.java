@@ -40,8 +40,8 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Constructor.
      *
-     * @param abscissa a abscissa for a new point.
-     * @param ordinate a ordinate for a new point.
+     * @param abscissa the abscissa for a new point.
+     * @param ordinate the ordinate for a new point.
      */
     public PointImpl(double abscissa, double ordinate) {
         this();
@@ -57,8 +57,8 @@ public class PointImpl extends AbstractFigure implements Point {
     @Override
     public String toString() {
         return super.toString() +
-                ", abscissa = " + abscissa +
-                ", ordinate = " + ordinate;
+                ", abscissa = " + getAbscissa() +
+                ", ordinate = " + getOrdinate();
     }
 
     /**
@@ -73,8 +73,8 @@ public class PointImpl extends AbstractFigure implements Point {
         boolean result = super.equals(object);
         if (result) {
             Point other = (Point) object;
-            result = (this.abscissa == other.getAbscissa()) &&
-                    (this.ordinate == other.getOrdinate());
+            result = (this.getAbscissa() == other.getAbscissa()) &&
+                    (this.getOrdinate() == other.getOrdinate());
         }
         return result;
     }
@@ -88,10 +88,9 @@ public class PointImpl extends AbstractFigure implements Point {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp = Double.doubleToLongBits(abscissa);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(ordinate);
+        long temp = Double.doubleToLongBits(getAbscissa());
+        int result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getOrdinate());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -102,7 +101,7 @@ public class PointImpl extends AbstractFigure implements Point {
      * the dimensions that can be neglected.
      * And a point area is 0.
      *
-     * @return a point area.
+     * @return the point area.
      */
     @Override
     public double getArea() {
@@ -115,7 +114,7 @@ public class PointImpl extends AbstractFigure implements Point {
      * the dimensions that can be neglected.
      * And a point perimeter is 0.
      *
-     * @return a point perimeter.
+     * @return the point perimeter.
      */
     @Override
     public double getPerimeter() {
@@ -125,17 +124,17 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns an abscissa coordinate of a point.
      *
-     * @return an abscissa coordinate of a point.
+     * @return the abscissa coordinate of a point.
      */
     @Override
     public double getAbscissa() {
-        return abscissa;
+        return this.abscissa;
     }
 
     /**
      * Sets a new abscissa coordinate for a point.
      *
-     * @param abscissa a new abscissa coordinate.
+     * @param abscissa the new abscissa coordinate.
      */
     @Override
     public void setAbscissa(double abscissa) {
@@ -145,17 +144,17 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a point ordinate.
      *
-     * @return a point ordinate.
+     * @return the point ordinate.
      */
     @Override
     public double getOrdinate() {
-        return ordinate;
+        return this.ordinate;
     }
 
     /**
      * Sets a new ordinate coordinate for a point.
      *
-     * @param ordinate a new ordinate coordinate.
+     * @param ordinate the new ordinate coordinate.
      */
     @Override
     public void setOrdinate(double ordinate) {
@@ -183,7 +182,7 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a minimum abscissa.
      *
-     * @param points a point list to check.
+     * @param points the point list to check.
      * @return a minimum abscissa.
      */
     public static double getMinAbscissa(List<Point> points) {
@@ -197,7 +196,7 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a maximum abscissa.
      *
-     * @param points a point list to check.
+     * @param points the point list to check.
      * @return a maximum abscissa.
      */
     public static double getMaxAbscissa(List<Point> points) {
@@ -211,7 +210,7 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a minimum ordinate.
      *
-     * @param points a point list to check.
+     * @param points the point list to check.
      * @return a minimum ordinate.
      */
     public static double getMinOrdinate(List<Point> points) {
@@ -225,7 +224,7 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a maximum ordinate.
      *
-     * @param points a point list to check.
+     * @param points the point list to check.
      * @return a maximum ordinate.
      */
     public static double getMaxOrdinate(List<Point> points) {
@@ -239,22 +238,22 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Returns a minimum of two values.
      *
-     * @param value1 a first value to check.
-     * @param value2 a second value to check.
+     * @param first the first value to check.
+     * @param second the second value to check.
      * @return a minimum value.
      */
-    private static double getMin(double value1, double value2) {
-        return (value1 < value2) ? value1 : value2;
+    private static double getMin(double first, double second) {
+        return (first < second) ? first : second;
     }
 
     /**
      * Returns a maximum of two values.
      *
-     * @param value1 a first value to check.
-     * @param value2 a second value to check.
+     * @param first the first value to check.
+     * @param second the second value to check.
      * @return a maximum value.
      */
-    private static double getMax(double value1, double value2) {
-        return (value1 > value2) ? value1 : value2;
+    private static double getMax(double first, double second) {
+        return (first > second) ? first : second;
     }
 }

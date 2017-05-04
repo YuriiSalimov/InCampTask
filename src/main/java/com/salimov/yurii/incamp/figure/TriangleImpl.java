@@ -41,9 +41,9 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     /**
      * Constructor.
      *
-     * @param sideA a side A for a new rectangle.
-     * @param sideB a side B for a new rectangle.
-     * @param sideC a side C for a new rectangle.
+     * @param sideA the side A for a new rectangle.
+     * @param sideB the side B for a new rectangle.
+     * @param sideC the side C for a new rectangle.
      */
     public TriangleImpl(double sideA, double sideB, double sideC) {
         this();
@@ -57,24 +57,24 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
      * triangle area = sqrt[SP * (SP - sideA) * (SP - sideB)* (SP - sideC)],
      * where SP is semiperimeter.
      *
-     * @return a triangle area.
+     * @return the triangle area.
      */
     @Override
     public double getArea() {
         double semiperimeter = getPerimeter() / 2;
-        return Math.sqrt(semiperimeter * (semiperimeter - sideA) *
-                (semiperimeter - sideB) * (semiperimeter - sideC));
+        return Math.sqrt(semiperimeter * (semiperimeter - getSideA()) *
+                (semiperimeter - getSideB()) * (semiperimeter - getSideC()));
     }
 
     /**
      * Calculates and returns a triangle perimeter.
      * triangle perimeter = sideA + sideB + sideC
      *
-     * @return a triangle perimeter.
+     * @return the triangle perimeter.
      */
     @Override
     public double getPerimeter() {
-        return sideA + sideB + sideC;
+        return (getSideA() + getSideB() + getSideC());
     }
 
     /**
@@ -85,9 +85,9 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     @Override
     public String toString() {
         return super.toString() +
-                ", sideA = " + sideA +
-                ", sideB = " + sideB +
-                ", sideC = " + sideC +
+                ", sideA = " + getSideA() +
+                ", sideB = " + getSideB() +
+                ", sideC = " + getSideC() +
                 ", angleAlpha = " + getAngleAlpha() +
                 ", angleBeta = " + getAngleBeta() +
                 ", angleGamma = " + getAngleGamma();
@@ -105,9 +105,9 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
         boolean result = super.equals(object);
         if (result) {
             Triangle other = (Triangle) object;
-            result = (this.sideA == other.getSideA()) &&
-                    (this.sideB == other.getSideB()) &&
-                    (this.sideC == other.getSideC());
+            result = (this.getSideA() == other.getSideA()) &&
+                    (this.getSideB() == other.getSideB()) &&
+                    (this.getSideC() == other.getSideC());
         }
         return result;
     }
@@ -121,31 +121,36 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp = Double.doubleToLongBits(sideA);
+        long temp = Double.doubleToLongBits(getSideA());
+        int result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getSideB());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(sideB);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(sideC);
+        temp = Double.doubleToLongBits(getSideC());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
     /**
      * Returns a side A of a triangle.
+     * This is the side between the points B and C.
      *
-     * @return a side A of a triangle.
+     * @return the side A of a triangle.
      */
     @Override
     public double getSideA() {
-        return sideA;
+        return this.sideA;
     }
 
     /**
      * Sets a new side A for a triangle.
+     * This is the side between the points B and C.
      * If input side A is negative, then sets zero.
+     * <pre>
+     *     setSideA(10) - sets 10
+     *     setSideA(-10) - sets 0
+     * </pre>
      *
-     * @param sideA a new side A for a triangle
+     * @param sideA the new side A for a triangle
      */
     @Override
     public void setSideA(double sideA) {
@@ -154,17 +159,23 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
 
     /**
      * Returns a side B of a triangle.
+     * This is the side between the points A and C.
      *
-     * @return a side B of a triangle.
+     * @return the side B of a triangle.
      */
     @Override
     public double getSideB() {
-        return sideB;
+        return this.sideB;
     }
 
     /**
      * Sets a new side B for a triangle.
+     * This is the side between the points A and C.
      * If input side B is negative, then sets zero.
+     * <pre>
+     *     setSideB(10) - sets 10
+     *     setSideB(-10) - sets 0
+     * </pre>
      *
      * @param sideB a new side B for a triangle
      */
@@ -175,19 +186,25 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
 
     /**
      * Returns a side C of a triangle.
+     * This is the side between the points A and B.
      *
-     * @return a side C of a triangle.
+     * @return the side C of a triangle.
      */
     @Override
     public double getSideC() {
-        return sideC;
+        return this.sideC;
     }
 
     /**
      * Sets a new side C for a triangle.
+     * This is the side between the points A and B.
      * If input side C is negative, then sets zero.
+     * <pre>
+     *     setSideC(10) - sets 10
+     *     setSideC(-10) - sets 0
+     * </pre>
      *
-     * @param sideC a new side C for a triangle
+     * @param sideC the new side C for a triangle
      */
     @Override
     public void setSideC(double sideC) {
@@ -196,38 +213,42 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
 
     /**
      * Calculates and returns a triangle angle Alpha.
+     * This is the angle between the sides B and C.
      *
-     * @return a triangle angle Alpha.
+     * @return the triangle angle Alpha.
      */
     @Override
     public double getAngleAlpha() {
-        return getAngle(sideA, sideB, sideC);
+        return getAngle(getSideA(), getSideB(), getSideC());
     }
 
     /**
      * Calculates and returns a triangle angle Beta.
+     * This is the angle between the sides A and C.
      *
-     * @return a triangle angle Beta.
+     * @return the triangle angle Beta.
      */
     @Override
     public double getAngleBeta() {
-        return getAngle(sideB, sideA, sideC);
+        return getAngle(getSideB(), getSideA(), getSideC());
     }
 
     /**
      * Calculates and returns a triangle angle Gamma.
+     * This is the angle between the sides A and B.
      *
-     * @return a triangle angle Gamma.
+     * @return the triangle angle Gamma.
      */
     @Override
     public double getAngleGamma() {
-        return getAngle(sideC, sideB, sideA);
+        return getAngle(getSideC(), getSideB(), getSideA());
     }
 
     /**
      * Calculates and returns a point A of a triangle.
+     * This is the point of intersection of sides B and C.
      *
-     * @return a point A of a triangle.
+     * @return the point A of a triangle.
      */
     @Override
     public Point getPointA() {
@@ -236,31 +257,33 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
 
     /**
      * Calculates and returns a point B of a triangle.
+     * This is the point of intersection of sides A and C.
      *
-     * @return a point B of a triangle.
+     * @return the point B of a triangle.
      */
     @Override
     public Point getPointB() {
-        return new PointImpl(0, sideA);
+        return new PointImpl(0, getSideA());
     }
 
     /**
      * Calculates and returns a point C of a triangle.
+     * This is the point of intersection of sides A and B.
      *
-     * @return a point C of a triangle.
+     * @return the point C of a triangle.
      */
     @Override
     public Point getPointC() {
         return new PointImpl(
-                Math.abs(sideC * Math.cos(getAngleAlpha())),
-                Math.abs(sideC * Math.cos(getAngleBeta()))
+                Math.abs(getSideC() * Math.cos(getAngleAlpha())),
+                Math.abs(getSideC() * Math.cos(getAngleBeta()))
         );
     }
 
     /**
      * Returns a triangle name.
      *
-     * @return a triangle name
+     * @return the triangle name
      */
     @Override
     public String getName() {
@@ -300,22 +323,9 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
      */
     @Override
     public boolean isTriangle() {
-        return isSideOk(sideA, sideB, sideC) &&
-                isSideOk(sideB, sideC, sideA) &&
-                isSideOk(sideC, sideA, sideB);
-    }
-
-    /**
-     * Checks a incoming sides.
-     *
-     * @param sideA a side A to check.
-     * @param sideB a side B to check.
-     * @param sideC a side C to check.
-     * @return true if side A + side B is more than side C,
-     * false otherwise.
-     */
-    private static boolean isSideOk(double sideA, double sideB, double sideC) {
-        return (sideA + sideB > sideC);
+        return isSideOk(getSideA(), getSideB(), getSideC()) &&
+                isSideOk(getSideB(), getSideC(), getSideA()) &&
+                isSideOk(getSideC(), getSideA(), getSideB());
     }
 
     /**
@@ -334,7 +344,7 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     /**
      * Checks if a point is in the triangle.
      *
-     * @param point a point to check.
+     * @param point the point to check.
      * @return true if incoming point is in a triangle,
      * false otherwise.
      */
@@ -348,10 +358,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     /**
      * Calculates and returns normal value.
      *
-     * @param pointA       a point A of a side.
-     * @param pointB       a point B of a side.
-     * @param pointToCheck a point to check.
-     * @return a normal value.
+     * @param pointA       the point A of a side.
+     * @param pointB       the point B of a side.
+     * @param pointToCheck the point to check.
+     * @return the normal value.
      */
     private static double getNormal(Point pointA, Point pointB, Point pointToCheck) {
         return (pointA.getAbscissa() - pointToCheck.getAbscissa()) *
@@ -362,10 +372,17 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
 
     /**
      * Checks a normals of a triangle.
+     * Returns true if incoming normals are in similar diapason.
+     * <pre>
+     *     checkNormal(10, 2, 5) = true
+     *     checkNormal(-10, -2, -5) = true
+     *     checkNormal(-10, 2, -5) = false
+     *     checkNormal(10, -2, 5) = false
+     * </pre>
      *
-     * @param normalA a normal A of a triangle.
-     * @param normalB a normal B of a triangle.
-     * @param normalC a normal C of a triangle.
+     * @param normalA the normal A of a triangle.
+     * @param normalB the normal B of a triangle.
+     * @param normalC thea normal C of a triangle.
      * @return true if incoming normals are in similar diapason,
      * false otherwise.
      */
@@ -378,12 +395,31 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
      * Calculates and returns a triangle angle.
      * angle = arccos[(B^2 + C^2 - A^2) / (2 * B * C)]
      *
-     * @param sideA a side A of a triangle.
-     * @param sideB a side B of a triangle.
-     * @param sideC a side C of a triangle.
+     * @param sideA the side A of a triangle.
+     * @param sideB the side B of a triangle.
+     * @param sideC the side C of a triangle.
      * @return a angle.
      */
     private static double getAngle(double sideA, double sideB, double sideC) {
         return Math.acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideB * sideC));
+    }
+
+    /**
+     * Checks a incoming sides.
+     * <pre>
+     *     isSideOk(1, 3, 2) = true
+     *     isSideOk(3, 1, 2) = true
+     *     isSideOk(1, 2, 3) = false
+     *     isSideOk(2, 1, 3) = false
+     * </pre>
+     *
+     * @param sideA the side A to check.
+     * @param sideB the side B to check.
+     * @param sideC the side C to check.
+     * @return true if side A + side B is more than side C,
+     * false otherwise.
+     */
+    private static boolean isSideOk(double sideA, double sideB, double sideC) {
+        return (sideA + sideB > sideC);
     }
 }

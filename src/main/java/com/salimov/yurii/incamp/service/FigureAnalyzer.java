@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * The class implements a set of methods
- * for printing a geometric figures in the console.
+ * for analyzing an incoming figures.
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -16,7 +16,7 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Returns a figure with a maximum area.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      * @return a figure with a maximum area.
      */
     @Override
@@ -31,19 +31,19 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Returns a figure with a maximum area.
      *
-     * @param figure1 a first figure to analyze.
-     * @param figure2 a second figure to analyze.
+     * @param first  the first figure to analyze.
+     * @param second the second figure to analyze.
      * @return a figure with a maximum area.
      */
     @Override
-    public Figure getWithMaxArea(Figure figure1, Figure figure2) {
-        return areaAnalyzer(figure1, figure2) ? figure1 : figure2;
+    public Figure getWithMaxArea(Figure first, Figure second) {
+        return areaAnalyzer(first, second) ? first : second;
     }
 
     /**
      * Returns a figure with a minimum area.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      * @return a figure with a minimum area.
      */
     @Override
@@ -58,19 +58,19 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Returns a figure with a minimum area.
      *
-     * @param figure1 a first figure to analyze.
-     * @param figure2 a second figure to analyze.
+     * @param first  the first figure to analyze.
+     * @param second the second figure to analyze.
      * @return a figure with a minimum area.
      */
     @Override
-    public Figure getWithMinArea(Figure figure1, Figure figure2) {
-        return areaAnalyzer(figure1, figure2) ? figure2 : figure1;
+    public Figure getWithMinArea(Figure first, Figure second) {
+        return areaAnalyzer(first, second) ? second : first;
     }
 
     /**
      * Returns a figure with a maximum perimeter.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      * @return a figure with a maximum perimeter.
      */
     @Override
@@ -85,19 +85,19 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Returns a figure with a maximum perimeter.
      *
-     * @param figure1 a first figure to analyze.
-     * @param figure2 a second figure to analyze.
+     * @param first  the first figure to analyze.
+     * @param second the second figure to analyze.
      * @return a figure with a maximum perimeter.
      */
     @Override
-    public Figure getWithMaxPerimeter(Figure figure1, Figure figure2) {
-        return perimeterAnalyzer(figure1, figure2) ? figure1 : figure2;
+    public Figure getWithMaxPerimeter(Figure first, Figure second) {
+        return perimeterAnalyzer(first, second) ? first : second;
     }
 
     /**
      * Returns a figure with a minimum perimeter.
      *
-     * @param figures a figure list to analyze.
+     * @param figures the figure list to analyze.
      * @return a figure with a maximum perimeter.
      */
     public Figure getWithMinPerimeter(List<Figure> figures) {
@@ -111,20 +111,20 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Returns a figure with a minimum perimeter.
      *
-     * @param figure1 a first figure to analyze.
-     * @param figure2 a second figure to analyze.
+     * @param first  the first figure to analyze.
+     * @param second the second figure to analyze.
      * @return a figure with a minimum perimeter.
      */
     @Override
-    public Figure getWithMinPerimeter(Figure figure1, Figure figure2) {
-        return perimeterAnalyzer(figure1, figure2) ? figure2 : figure1;
+    public Figure getWithMinPerimeter(Figure first, Figure second) {
+        return perimeterAnalyzer(first, second) ? second : first;
     }
 
     /**
      * Analyzes a incoming geometric figures by area.
      *
-     * @param more a geometric figure with more area.
-     * @param less a geometric figure with less area.
+     * @param more the geometric figure with more area.
+     * @param less the geometric figure with less area.
      * @return true if area of a "more" figure is more
      * of area of a "less" figure, false otherwise.
      */
@@ -135,8 +135,8 @@ public class FigureAnalyzer implements Analyzer {
     /**
      * Analyzes a incoming geometric figures by perimeter.
      *
-     * @param more a geometric figure with more perimeter.
-     * @param less a geometric figure with less perimeter.
+     * @param more the geometric figure with more perimeter.
+     * @param less the geometric figure with less perimeter.
      * @return true if perimeter of a "more" figure is more
      * of perimeter of a "less" figure, false otherwise.
      */
