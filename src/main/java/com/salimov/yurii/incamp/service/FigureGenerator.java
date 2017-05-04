@@ -168,12 +168,11 @@ public class FigureGenerator implements Generator {
     }
 
     /**
-     * Returns a random number in diapason
-     * from maxCoordinate to 2 * maxCoordinate.
+     * Returns a random number in diapason from 1 to maxCoordinate.
      *
-     * @return a random number.
+     * @return a random integer.
      */
     private int getNextInt() {
-        return RANDOM.nextInt(getMaxCoordinate()) + getMaxCoordinate();
+        return RANDOM.nextInt(getMaxCoordinate()) + 1;
     }
 }

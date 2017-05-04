@@ -14,14 +14,23 @@ import java.util.List;
 public class Main {
 
     /**
+     * The figures number.
+     */
+    private final static int FIGURES_NUMBER = 10;
+
+    /**
+     * The maximum coordinate of a geometric figures.
+     */
+    private final static int MAX_COORDINATE = 25;
+
+    /**
      * Main method.
      *
      * @param args a incoming parameters.
      */
     public static void main(String[] args) {
         Generator generator = getGenerator();
-        int figuresNumber = 10;
-        List<Figure> figures = generator.getFigures(figuresNumber);
+        List<Figure> figures = generator.getFigures(FIGURES_NUMBER);
 
         Printer printer = getPrinter();
         printer.printlnAll(figures);
@@ -39,8 +48,7 @@ public class Main {
      * @return a new Generator.
      */
     private static Generator getGenerator() {
-        int maxCoordinate = 10;
-        return new FigureGenerator(maxCoordinate);
+        return new FigureGenerator(MAX_COORDINATE);
     }
 
     /**
