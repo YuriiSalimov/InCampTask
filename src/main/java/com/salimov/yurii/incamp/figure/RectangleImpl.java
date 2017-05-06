@@ -3,6 +3,19 @@ package com.salimov.yurii.incamp.figure;
 /**
  * The class implements a set of methods
  * for working with a Rectangle geometric figure.
+ *<pre>
+ *               w i d t h
+ *       A |←----------------→| B
+ *      -- * * * * * * * * * * *
+ *   h  ↑  * * * * * * * * * * *
+ *   e  |  * * * * * * * * * * *
+ *   i  |  * * * * * * * * * * *
+ *   g  |  * * * * * * * * * * *
+ *   h  |  * * * * * * * * * * *
+ *   t  ↓  * * * * * * * * * * *
+ *      -- * * * * * * * * * * *
+ *       C                       D
+ * </pre>
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -17,18 +30,12 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
     /**
      * Rectangle width.
      */
-    private double width;
+    private final double width;
 
     /**
      * Rectangle height.
      */
-    private double height;
-
-    /**
-     * Default constructor.
-     */
-    public RectangleImpl() {
-    }
+    private final double height;
 
     /**
      * Constructor.
@@ -37,9 +44,8 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      * @param height the height for a new rectangle.
      */
     public RectangleImpl(double width, double height) {
-        this();
-        setWidth(width);
-        setHeight(height);
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -117,22 +123,7 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      */
     @Override
     public double getWidth() {
-        return this.width;
-    }
-
-    /**
-     * Sets a new width for a rectangle.
-     * If input width is negative, then sets zero.
-     * <pre>
-     *     setWidth(10) - sets 10
-     *     setWidth(-10) - sets 0
-     * </pre>
-     *
-     * @param width the new rectangle width.
-     */
-    @Override
-    public void setWidth(double width) {
-        this.width = (width > 0) ? width : 0;
+        return (this.width > 0) ? this.width : 0;
     }
 
     /**
@@ -142,22 +133,7 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      */
     @Override
     public double getHeight() {
-        return this.height;
-    }
-
-    /**
-     * Sets a new height for a rectangle.
-     * If input height is negative, then sets zero.
-     * <pre>
-     *     setHeight(10) - sets 10
-     *     setHeight(-10) - sets 0
-     * </pre>
-     *
-     * @param height the new rectangle height.
-     */
-    @Override
-    public void setHeight(double height) {
-        this.height = (height > 0) ? height : 0;
+        return (this.height > 0) ? this.height : 0;
     }
 
     /**
@@ -209,9 +185,10 @@ public class RectangleImpl extends AbstractFigure implements Rectangle {
      */
     @Override
     public void draw() {
-        Point point = new PointImpl();
+        Point point;
         for (int abscissa = 0; abscissa <= getWidth(); abscissa++) {
             for (int ordinate = 0; ordinate <= getHeight(); ordinate++) {
+                point = new PointImpl(abscissa, ordinate);
                 point.draw();
             }
             System.out.println();

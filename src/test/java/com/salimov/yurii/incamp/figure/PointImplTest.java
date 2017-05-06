@@ -11,151 +11,126 @@ import java.util.*;
  */
 public class PointImplTest extends AbstractFigureTest {
 
+    private final static double DEFAULT_ABSCISSA = 10;
+    private final static double DEFAULT_ORDINATE = 15;
+    private final static int DEFAULT_POINT_NUMBER = 5;
+
     @Test
     public void toStringTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
         String pointToString = "Point: perimeter = " + 0.0 +
                 ", area = " + 0.0 +
-                ", abscissa = " + abscissa +
-                ", ordinate = " + ordinate;
-        Point point = new PointImpl(abscissa, ordinate);
+                ", abscissa = " + DEFAULT_ABSCISSA +
+                ", ordinate = " + DEFAULT_ORDINATE;
+        Point point = createDefaultPoint();
         Assert.assertEquals(point.toString(), pointToString);
     }
 
     @Test
     public void equalsTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        Point point1 = new PointImpl(abscissa, ordinate);
-        Point point2 = new PointImpl(abscissa, ordinate);
-        Point point3 = new PointImpl(abscissa, ordinate);
+        Point point1 = createDefaultPoint();
+        Point point2 = createDefaultPoint();
+        Point point3 = createDefaultPoint();
         equalsTest(point1, point2, point3);
     }
 
     @Test
     public void equalsDifferentFiguresTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        Point point1 = new PointImpl(abscissa, 2 * ordinate);
-        Point point2 = new PointImpl(2 * abscissa, ordinate);
+        Point point1 = createPoint(DEFAULT_ABSCISSA, 2 * DEFAULT_ORDINATE);
+        Point point2 = createPoint(2 * DEFAULT_ABSCISSA, DEFAULT_ORDINATE);
         equalsDifferentFiguresTest(point1, point2);
 
-        point1 = new PointImpl(abscissa, ordinate);
-        point2 = new PointImpl(abscissa, 2 * ordinate);
+        point2 = createDefaultPoint();
         equalsDifferentFiguresTest(point1, point2);
     }
 
     @Test
     public void hashCodeTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        Point point = new PointImpl(abscissa, ordinate);
+        Point point = createDefaultPoint();
         hashCodeTest(point);
     }
 
     @Test
     public void getAreaTest() throws Exception {
-        Point point = new PointImpl();
+        Point point = createDefaultPoint();
         Assert.assertTrue(point.getArea() == 0);
     }
 
     @Test
     public void getPerimeterTest() throws Exception {
-        Point point = new PointImpl();
-        Assert.assertTrue(point.getArea() == 0);
+        Point point = createDefaultPoint();
+        Assert.assertTrue(point.getPerimeter() == 0);
     }
 
     @Test
     public void getAbscissaTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        Point point = new PointImpl(abscissa, ordinate);
-        Assert.assertTrue(point.getAbscissa() == abscissa);
-    }
-
-    @Test
-    public void setAbscissaTest() throws Exception {
-        double abscissa = 10;
-        Point point = new PointImpl();
-        point.setAbscissa(abscissa);
-        Assert.assertTrue(point.getAbscissa() == abscissa);
+        Point point = createDefaultPoint();
+        Assert.assertTrue(point.getAbscissa() == DEFAULT_ABSCISSA);
     }
 
     @Test
     public void getOrdinateTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        Point point = new PointImpl(abscissa, ordinate);
-        Assert.assertTrue(point.getOrdinate() == ordinate);
-    }
-
-    @Test
-    public void setOrdinateTest() throws Exception {
-        double ordinate = 15;
-        Point point = new PointImpl();
-        point.setOrdinate(ordinate);
-        Assert.assertTrue(point.getOrdinate() == ordinate);
+        Point point = createDefaultPoint();
+        Assert.assertTrue(point.getOrdinate() == DEFAULT_ORDINATE);
     }
 
     @Test
     public void drawTest() throws Exception {
-        Point point = new PointImpl();
+        Point point = createDefaultPoint();
         point.draw();
     }
 
     @Test
     public void getNameTest() throws Exception {
         String name = "Point";
-        Point point = new PointImpl();
+        Point point = createDefaultPoint();
         Assert.assertEquals(point.getName(), name);
     }
 
     @Test
     public void getMinAbscissaTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        int number = 5;
-        List<Point> points = getPoints(abscissa, ordinate, number);
+        List<Point> points = createDefaultPoints();
         double minAbscissa = PointImpl.getMinAbscissa(points);
-        Assert.assertTrue(minAbscissa == abscissa);
+        Assert.assertTrue(minAbscissa == DEFAULT_ABSCISSA);
     }
 
     @Test
     public void getMaxAbscissaTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        int number = 5;
-        List<Point> points = getPoints(abscissa, ordinate, number);
+        List<Point> points = createDefaultPoints();
         double maxAbscissa = PointImpl.getMaxAbscissa(points);
-        Assert.assertTrue(maxAbscissa == (abscissa * number));
+        Assert.assertTrue(maxAbscissa == (DEFAULT_ABSCISSA * DEFAULT_POINT_NUMBER));
     }
 
     @Test
     public void getMinOrdinateTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        int number = 5;
-        List<Point> points = getPoints(abscissa, ordinate, number);
+        List<Point> points = createDefaultPoints();
         double minOrdinate = PointImpl.getMinOrdinate(points);
-        Assert.assertTrue(minOrdinate == ordinate);
+        Assert.assertTrue(minOrdinate == DEFAULT_ORDINATE);
     }
 
     @Test
     public void getMaxOrdinateTest() throws Exception {
-        double abscissa = 10;
-        double ordinate = 15;
-        int number = 5;
-        List<Point> points = getPoints(abscissa, ordinate, number);
+        List<Point> points = createDefaultPoints();
         double maxOrdinate = PointImpl.getMaxOrdinate(points);
-        Assert.assertTrue(maxOrdinate == (ordinate * number));
+        Assert.assertTrue(maxOrdinate == (DEFAULT_ORDINATE * DEFAULT_POINT_NUMBER));
     }
 
-    private static List<Point> getPoints(double abscissa, double ordinate, int number) {
+    private static List<Point> createDefaultPoints() {
+        return createPoints(DEFAULT_ABSCISSA, DEFAULT_ORDINATE, DEFAULT_POINT_NUMBER);
+    }
+
+    private static List<Point> createPoints(double abscissa, double ordinate, int number) {
         Set<Point> points = new HashSet<>();
         for (int i = 1; i < number + 1; i++) {
-            points.add(new PointImpl(i * abscissa, i * ordinate));
+            points.add(createPoint(i * abscissa, i * ordinate));
         }
         return new ArrayList<>(points);
+    }
+    
+    private static Point createDefaultPoint() {
+        return createPoint(DEFAULT_ABSCISSA, DEFAULT_ORDINATE);
+    }
+    
+    private static Point createPoint(double abscissa, double ordinate) {
+        return new PointImpl(abscissa, ordinate);
     }
 }

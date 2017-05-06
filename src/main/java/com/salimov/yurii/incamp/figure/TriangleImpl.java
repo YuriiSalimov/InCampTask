@@ -6,6 +6,20 @@ import java.util.List;
 /**
  * The class implements a set of methods
  * for working with a Triangle geometric figure.
+ * <pre>
+ *                    a
+ *    A |←---------------------------→|  B
+ *    -- * * * * * * * * * * * * * * * *
+ *    ↑  * > alpha * * * * beta < *    \
+ *    |  * * * * * * * * * * * *     /
+ *    |  * * * * * * * * * *      /
+ *  b |  * * * * * * * *      /
+ *    |  * gamma* * *     /
+ *    |  * ^ *  *     /    c
+ *    ↓  * *     /
+ *    -- *\   /
+ *      C  \
+ * </pre>
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -18,38 +32,34 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     private final static String NAME = "Triangle";
 
     /**
-     * Side A of a triangle.
+     * The length of a first side (A) of a triangle.
+     * The side between the B and C points.
      */
-    private double sideA;
+    private final double sideA;
 
     /**
-     * Side B of a triangle.
+     * The length of a second side (B) of a triangle.
+     * The side between the A and C points .
      */
-    private double sideB;
+    private final double sideB;
 
     /**
-     * Side C of a triangle.
+     * The length of a third side (C) of a triangle.
+     * The side between the A and B points.
      */
-    private double sideC;
-
-    /**
-     * Default constructor.
-     */
-    public TriangleImpl() {
-    }
+    private final double sideC;
 
     /**
      * Constructor.
      *
-     * @param sideA the side A for a new rectangle.
-     * @param sideB the side B for a new rectangle.
-     * @param sideC the side C for a new rectangle.
+     * @param sideA the length of a first side for a new rectangle.
+     * @param sideB the length of a second side for a new rectangle.
+     * @param sideC the length of a third side for a new rectangle.
      */
     public TriangleImpl(double sideA, double sideB, double sideC) {
-        this();
-        setSideA(sideA);
-        setSideB(sideB);
-        setSideC(sideC);
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
     }
 
     /**
@@ -131,91 +141,40 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Returns a side A of a triangle.
-     * This is the side between the points B and C.
+     * Returns a length of the first triangle side (A).
      *
-     * @return the side A of a triangle.
+     * @return the first side length.
      */
     @Override
     public double getSideA() {
-        return this.sideA;
+        return (this.sideA > 0) ? this.sideA : 0;
     }
 
     /**
-     * Sets a new side A for a triangle.
-     * This is the side between the points B and C.
-     * If input side A is negative, then sets zero.
-     * <pre>
-     *     setSideA(10) - sets 10
-     *     setSideA(-10) - sets 0
-     * </pre>
+     * Returns a length of a second triangle side (B).
      *
-     * @param sideA the new side A for a triangle
-     */
-    @Override
-    public void setSideA(double sideA) {
-        this.sideA = (sideA > 0) ? sideA : 0;
-    }
-
-    /**
-     * Returns a side B of a triangle.
-     * This is the side between the points A and C.
-     *
-     * @return the side B of a triangle.
+     * @return the second side length.
      */
     @Override
     public double getSideB() {
-        return this.sideB;
+        return (this.sideB > 0) ? this.sideB : 0;
     }
 
     /**
-     * Sets a new side B for a triangle.
-     * This is the side between the points A and C.
-     * If input side B is negative, then sets zero.
-     * <pre>
-     *     setSideB(10) - sets 10
-     *     setSideB(-10) - sets 0
-     * </pre>
+     * Returns the length of a third triangle side (C).
      *
-     * @param sideB a new side B for a triangle
-     */
-    @Override
-    public void setSideB(double sideB) {
-        this.sideB = (sideB > 0) ? sideB : 0;
-    }
-
-    /**
-     * Returns a side C of a triangle.
-     * This is the side between the points A and B.
-     *
-     * @return the side C of a triangle.
+     * @return the third side length.
      */
     @Override
     public double getSideC() {
-        return this.sideC;
+        return (this.sideC > 0) ? this.sideC : 0;
     }
 
     /**
-     * Sets a new side C for a triangle.
-     * This is the side between the points A and B.
-     * If input side C is negative, then sets zero.
-     * <pre>
-     *     setSideC(10) - sets 10
-     *     setSideC(-10) - sets 0
-     * </pre>
+     * Calculates and returns a triangle Alpha angle.
+     * The angle between the B and C sides.
      *
-     * @param sideC the new side C for a triangle
-     */
-    @Override
-    public void setSideC(double sideC) {
-        this.sideC = (sideC > 0) ? sideC : 0;
-    }
-
-    /**
-     * Calculates and returns a triangle angle Alpha.
-     * This is the angle between the sides B and C.
-     *
-     * @return the triangle angle Alpha.
+     * @return the triangle Alpha angle.
      */
     @Override
     public double getAngleAlpha() {
@@ -223,10 +182,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Calculates and returns a triangle angle Beta.
-     * This is the angle between the sides A and C.
+     * Calculates and returns a triangle Beta angle.
+     * This is the angle between the A and C sides.
      *
-     * @return the triangle angle Beta.
+     * @return the triangle Beta angle.
      */
     @Override
     public double getAngleBeta() {
@@ -234,10 +193,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Calculates and returns a triangle angle Gamma.
-     * This is the angle between the sides A and B.
+     * Calculates and returns a triangle Gamma angle.
+     * This is the angle between the A and B sides.
      *
-     * @return the triangle angle Gamma.
+     * @return the triangle Gamma angle.
      */
     @Override
     public double getAngleGamma() {
@@ -245,10 +204,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Calculates and returns a point A of a triangle.
+     * Calculates and returns a A point of a triangle.
      * This is the point of intersection of sides B and C.
      *
-     * @return the point A of a triangle.
+     * @return the A point.
      */
     @Override
     public Point getPointA() {
@@ -256,10 +215,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Calculates and returns a point B of a triangle.
-     * This is the point of intersection of sides A and C.
+     * Calculates and returns a B point of a triangle.
+     * This is the point of intersection of A and C sides.
      *
-     * @return the point B of a triangle.
+     * @return the B point.
      */
     @Override
     public Point getPointB() {
@@ -267,10 +226,10 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Calculates and returns a point C of a triangle.
-     * This is the point of intersection of sides A and B.
+     * Calculates and returns a C point of a triangle.
+     * This is the point of intersection of A and B sides.
      *
-     * @return the point C of a triangle.
+     * @return the C point.
      */
     @Override
     public Point getPointC() {
@@ -291,7 +250,7 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     }
 
     /**
-     * Draws a triangle in the console.
+     * Draws this triangle in the console.
      * Draws a point if this point is in the triangle,
      * otherwise draws empty symbols "  ".
      */
@@ -331,7 +290,7 @@ public class TriangleImpl extends AbstractFigure implements Triangle {
     /**
      * Calculates and returns a points of a triangle.
      *
-     * @return a points of a triangle.
+     * @return thr points of a triangle.
      */
     private List<Point> getPoints() {
         List<Point> points = new ArrayList<>();

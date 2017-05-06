@@ -9,210 +9,136 @@ import org.junit.Test;
  */
 public class TriangleImplTest extends AbstractFigureTest {
 
+    private final static double DEFAULT_SIDE_A = 9;
+    private final static double DEFAULT_SIDE_B = 12;
+    private final static double DEFAULT_SIDE_C = 15;
+
     @Test
     public void getAreaTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getArea() == getTriangleArea(sideA, sideB, sideC));
+        Triangle triangle = createDefaultTriangle();
+        double calcArea = calculateTriangleArea(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
+        Assert.assertTrue(triangle.getArea() == calcArea);
     }
 
     @Test
     public void getPerimeterTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getPerimeter() == getTrianglePerimeter(sideA, sideB, sideC));
+        Triangle triangle = createDefaultTriangle();
+        double calcPerimeter = calculateTrianglePerimeter(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
+        Assert.assertTrue(triangle.getPerimeter() == calcPerimeter);
     }
 
     @Test
     public void toStringTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        String triangleToString = "Triangle: perimeter = " + getTrianglePerimeter(sideA, sideB, sideC) +
-                ", area = " + getTriangleArea(sideA, sideB, sideC) +
-                ", sideA = " + sideA +
-                ", sideB = " + sideB +
-                ", sideC = " + sideC +
-                ", angleAlpha = " + getAngle(sideA, sideB, sideC) +
-                ", angleBeta = " + getAngle(sideB, sideA, sideC) +
-                ", angleGamma = " + getAngle(sideC, sideB, sideA);
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        String triangleToString = "Triangle: perimeter = " +
+                calculateTrianglePerimeter(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C) +
+                ", area = " +
+                calculateTriangleArea(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C) +
+                ", sideA = " + DEFAULT_SIDE_A +
+                ", sideB = " + DEFAULT_SIDE_B +
+                ", sideC = " + DEFAULT_SIDE_C +
+                ", angleAlpha = " + calculateAngle(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C) +
+                ", angleBeta = " + calculateAngle(DEFAULT_SIDE_B, DEFAULT_SIDE_A, DEFAULT_SIDE_C) +
+                ", angleGamma = " + calculateAngle(DEFAULT_SIDE_C, DEFAULT_SIDE_B, DEFAULT_SIDE_A);
+        Triangle triangle = createDefaultTriangle();
         Assert.assertEquals(triangle.toString(), triangleToString);
     }
 
     @Test
     public void equalsSimilarFiguresTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle1 = new TriangleImpl(sideA, sideB, sideC);
-        Triangle triangle2 = new TriangleImpl(sideA, sideB, sideC);
-        Triangle triangle3 = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle1 = createDefaultTriangle();
+        Triangle triangle2 = createDefaultTriangle();
+        Triangle triangle3 = createDefaultTriangle();
         equalsTest(triangle1, triangle2, triangle3);
     }
 
     @Test
     public void equalsDifferentFiguresTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle1 = new TriangleImpl(2 * sideA, sideB, sideC);
-        Triangle triangle2 = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle1 = new TriangleImpl(2 * DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
+        Triangle triangle2 = createDefaultTriangle();
         equalsDifferentFiguresTest(triangle1, triangle2);
 
-        triangle1 = new TriangleImpl(sideA, sideB, sideC);
-        triangle2 = new TriangleImpl(sideA, 2 * sideB, sideC);
+        triangle1 = createDefaultTriangle();
+        triangle2 = createTriangle(DEFAULT_SIDE_A, 2 * DEFAULT_SIDE_B, DEFAULT_SIDE_C);
         equalsDifferentFiguresTest(triangle1, triangle2);
 
-        triangle1 = new TriangleImpl(sideA, sideB, 2 * sideC);
-        triangle2 = new TriangleImpl(sideA, sideB, sideC);
+        triangle1 = new TriangleImpl(DEFAULT_SIDE_A, DEFAULT_SIDE_B, 2 * DEFAULT_SIDE_C);
+        triangle2 = createDefaultTriangle();
         equalsDifferentFiguresTest(triangle1, triangle2);
     }
 
     @Test
     public void hashCodeTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle = createDefaultTriangle();
         hashCodeTest(triangle);
     }
 
     @Test
     public void getSideATest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getSideA() == sideA);
-    }
-
-    @Test
-    public void setSideATest() throws Exception {
-        double sideA = 9;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideA(sideA);
-        Assert.assertTrue(triangle.getSideA() == sideA);
-    }
-
-    @Test
-    public void whenSetNegativeSideAThenGetZero() throws Exception {
-        double sideA = -9;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideA(sideA);
-        Assert.assertTrue(triangle.getSideA() == 0);
+        Triangle triangle = createDefaultTriangle();
+        Assert.assertTrue(triangle.getSideA() == DEFAULT_SIDE_A);
     }
 
     @Test
     public void getSideBTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getSideB() == sideB);
-    }
-
-    @Test
-    public void setSideBTest() throws Exception {
-        double sideB = 12;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideB(sideB);
-        Assert.assertTrue(triangle.getSideB() == sideB);
-    }
-
-    @Test
-    public void whenSetNegativeSideBThenGetZero() throws Exception {
-        double sideB = -12;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideB(sideB);
-        Assert.assertTrue(triangle.getSideB() == 0);
+        Triangle triangle = createDefaultTriangle();
+        Assert.assertTrue(triangle.getSideB() == DEFAULT_SIDE_B);
     }
 
     @Test
     public void getSideCTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getSideC() == sideC);
+        Triangle triangle = createDefaultTriangle();
+        Assert.assertTrue(triangle.getSideC() == DEFAULT_SIDE_C);
     }
 
     @Test
-    public void setSideCTest() throws Exception {
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideC(sideC);
-        Assert.assertTrue(triangle.getSideC() == sideC);
-    }
-
-    @Test
-    public void whenSetNegativeSideCThenGetZero() throws Exception {
-        double sideC = -15;
-        Triangle triangle = new TriangleImpl();
-        triangle.setSideC(sideC);
+    public void whenSetNegativeSideThenGetZero() throws Exception {
+        Triangle triangle = createTriangle(-DEFAULT_SIDE_A, -DEFAULT_SIDE_B, -DEFAULT_SIDE_C);
+        Assert.assertTrue(triangle.getSideA() == 0);
+        Assert.assertTrue(triangle.getSideB() == 0);
         Assert.assertTrue(triangle.getSideC() == 0);
     }
 
     @Test
     public void getAngleAlphaTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getAngleAlpha() == getAngle(sideA, sideB, sideC));
+        Triangle triangle = createDefaultTriangle();
+        double alphaAngle = calculateDefaultAlphaAngle();
+        Assert.assertTrue(triangle.getAngleAlpha() == alphaAngle);
     }
 
     @Test
     public void getAngleBetaTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getAngleBeta() == getAngle(sideB, sideA, sideC));
+        Triangle triangle = createDefaultTriangle();
+        double betaAngle = calculateDefaultBetaAngle();
+        Assert.assertTrue(triangle.getAngleBeta() == betaAngle);
     }
 
     @Test
     public void getAngleGammaTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Assert.assertTrue(triangle.getAngleGamma() == getAngle(sideC, sideB, sideA));
+        Triangle triangle = createDefaultTriangle();
+        double gammaAngle = calculateDefaultGammaAngle();
+        Assert.assertTrue(triangle.getAngleGamma() == gammaAngle);
     }
 
     @Test
     public void getPointATest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle = createDefaultTriangle();
         Point pointA = new PointImpl(0, 0);
         Assert.assertEquals(triangle.getPointA(), pointA);
     }
 
     @Test
     public void getPointBTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
-        Point pointB = new PointImpl(0, sideA);
+        Triangle triangle = createDefaultTriangle();
+        Point pointB = new PointImpl(0, DEFAULT_SIDE_A);
         Assert.assertEquals(triangle.getPointB(), pointB);
     }
 
     @Test
     public void getPointCTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle = createDefaultTriangle();
         Point pointC = new PointImpl(
-                Math.abs(sideC * Math.cos(getAngle(sideA, sideB, sideC))),
-                Math.abs(sideC * Math.cos(getAngle(sideB, sideA, sideC)))
+                Math.abs(DEFAULT_SIDE_C * Math.cos(calculateDefaultAlphaAngle())),
+                Math.abs(DEFAULT_SIDE_C * Math.cos(calculateDefaultBetaAngle()))
         );
         Assert.assertEquals(triangle.getPointC(), pointC);
     }
@@ -220,48 +146,66 @@ public class TriangleImplTest extends AbstractFigureTest {
     @Test
     public void getNameTest() throws Exception {
         String name = "Triangle";
-        Triangle triangle = new TriangleImpl();
+        Triangle triangle = createDefaultTriangle();
         Assert.assertEquals(triangle.getName(), name);
     }
 
     @Test
     public void drawTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle = createDefaultTriangle();
         triangle.draw();
     }
 
     @Test
     public void isTriangleTest() throws Exception {
-        double sideA = 9;
-        double sideB = 12;
-        double sideC = 15;
-        Triangle triangle = new TriangleImpl(sideA, sideB, sideC);
+        Triangle triangle = createDefaultTriangle();
         Assert.assertTrue(triangle.isTriangle());
 
-        triangle = new TriangleImpl(4 * sideA, sideB, sideC);
+        triangle = createTriangle(4 * DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
         Assert.assertFalse(triangle.isTriangle());
 
-        triangle = new TriangleImpl(sideA, 2 * sideB, sideC);
+        triangle = createTriangle(DEFAULT_SIDE_A, 2 * DEFAULT_SIDE_B, DEFAULT_SIDE_C);
         Assert.assertFalse(triangle.isTriangle());
 
-        triangle = new TriangleImpl(sideA, sideB, 2 * sideC);
+        triangle = createTriangle(DEFAULT_SIDE_A, DEFAULT_SIDE_B, 2 * DEFAULT_SIDE_C);
         Assert.assertFalse(triangle.isTriangle());
     }
 
-    private static double getTrianglePerimeter(double sideA, double sideB, double sideC) {
-        return sideA + sideB + sideC;
+    private static Triangle createDefaultTriangle() {
+        return new TriangleImpl(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
     }
 
-    private static double getTriangleArea(double sideA, double sideB, double sideC) {
-        double semiperimeter = getTrianglePerimeter(sideA, sideB, sideC) / 2;
+    private static Triangle createTriangle(double sideA, double sideB, double sideC) {
+        return new TriangleImpl(sideA, sideB, sideC);
+    }
+
+    private static double calculateTrianglePerimeter(double sideA, double sideB, double sideC) {
+        return (sideA + sideB + sideC);
+    }
+
+    private static double calculateTriangleSemiPerimeter(double sideA, double sideB, double sideC) {
+        return calculateTrianglePerimeter(sideA, sideB, sideC) / 2;
+    }
+
+    private static double calculateTriangleArea(double sideA, double sideB, double sideC) {
+        double semiperimeter = calculateTriangleSemiPerimeter(sideA, sideB, sideC);
         return Math.sqrt(semiperimeter * (semiperimeter - sideA) *
                 (semiperimeter - sideB) * (semiperimeter - sideC));
     }
 
-    private static double getAngle(double sideA, double sideB, double sideC) {
+    private static double calculateAngle(double sideA, double sideB, double sideC) {
         return Math.acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideB * sideC));
+    }
+
+    private static double calculateDefaultAlphaAngle() {
+        return calculateAngle(DEFAULT_SIDE_A, DEFAULT_SIDE_B, DEFAULT_SIDE_C);
+    }
+
+    private static double calculateDefaultBetaAngle() {
+        return calculateAngle(DEFAULT_SIDE_B, DEFAULT_SIDE_A, DEFAULT_SIDE_C);
+    }
+
+    private static double calculateDefaultGammaAngle() {
+        return calculateAngle(DEFAULT_SIDE_C, DEFAULT_SIDE_B, DEFAULT_SIDE_A);
     }
 }

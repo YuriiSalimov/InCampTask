@@ -3,6 +3,20 @@ package com.salimov.yurii.incamp.figure;
 /**
  * The interface describes a set of methods
  * for working with a Triangle geometric figures.
+ * <pre>
+ *                    a
+ *    A |←---------------------------→|  B
+ *    -- * * * * * * * * * * * * * * * *
+ *    ↑  * alpha * * * * * * beta* *    \
+ *    |  * * * * * * * * * * * *     /
+ *    |  * * * * * * * * * *      /
+ *  b |  * * * * * * * *      /
+ *    |  * gamma* * *     /
+ *    |  * * *  *     /    c
+ *    ↓  * *     /
+ *    -- *\   /
+ *      C  \
+ * </pre>
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -18,14 +32,6 @@ public interface Triangle extends Figure {
     double getSideA();
 
     /**
-     * Sets a new side A for a triangle.
-     * This is the side between the points B and C.
-     *
-     * @param sideA the new side A for a triangle
-     */
-    void setSideA(double sideA);
-
-    /**
      * Returns a side B of a triangle.
      * This is the side between the points A and C.
      *
@@ -34,28 +40,12 @@ public interface Triangle extends Figure {
     double getSideB();
 
     /**
-     * Sets a new side B for a triangle.
-     * This is the side between the points A and C.
-     *
-     * @param sideB the new side B for a triangle
-     */
-    void setSideB(double sideB);
-
-    /**
      * Returns a side C of a triangle.
      * This is the side between the points A and B.
      *
      * @return the side C of a triangle.
      */
     double getSideC();
-
-    /**
-     * Sets a new side C for a triangle.
-     * This is the side between the points A and B.
-     *
-     * @param sideC the new side C for a triangle
-     */
-    void setSideC(double sideC);
 
     /**
      * Calculates and returns a triangle angle Alpha.

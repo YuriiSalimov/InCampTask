@@ -3,6 +3,17 @@ package com.salimov.yurii.incamp.figure;
 /**
  * The class implements a set of methods
  * for working with a Circle geometric figure.
+ * <pre>
+ *           *
+ *     * * d ↑ * * *
+ *   * * * i | * * * *
+ *   * * * a | radius *
+ * * * * * m *←------→ *
+ *   * * * e | ↖ * * *
+ *   * * * t | * \ * *
+ *     * * r ↓ * * \
+ *           *      centre
+ * </pre>
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -17,13 +28,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
     /**
      * Circle radius.
      */
-    private double radius;
-
-    /**
-     * Default constructor.
-     */
-    public CircleImpl() {
-    }
+    private final double radius;
 
     /**
      * Constructor.
@@ -31,8 +36,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
      * @param radius the radius for a new circle.
      */
     public CircleImpl(double radius) {
-        this();
-        setRadius(radius);
+        this.radius = radius;
     }
 
     /**
@@ -106,22 +110,7 @@ public class CircleImpl extends AbstractFigure implements Circle {
      */
     @Override
     public double getRadius() {
-        return this.radius;
-    }
-
-    /**
-     * Sets a new radius for a circle.
-     * If input radius is negative, then sets zero.
-     * <pre>
-     *     setRadius(10) - sets 10
-     *     setRadius(-10) - sets 0
-     * </pre>
-     *
-     * @param radius the new circle radius.
-     */
-    @Override
-    public void setRadius(double radius) {
-        this.radius = (radius > 0) ? radius : 0;
+        return (this.radius > 0) ? this.radius : 0;
     }
 
     /**
@@ -132,22 +121,6 @@ public class CircleImpl extends AbstractFigure implements Circle {
     @Override
     public double getDiameter() {
         return 2 * getRadius();
-    }
-
-    /**
-     * Sets a new diameter for a circle.
-     * In method calculates and sets a circle radius:
-     * radius = diameter / 2
-     * <pre>
-     *     setDiameter(10) - sets radius 5
-     *     setDiameter(-10) - sets 0
-     * </pre>
-     *
-     * @param diameter the new circle diameter.
-     */
-    @Override
-    public void setDiameter(double diameter) {
-        setRadius(diameter / 2);
     }
 
     /**

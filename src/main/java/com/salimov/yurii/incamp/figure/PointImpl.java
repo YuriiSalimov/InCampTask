@@ -24,18 +24,12 @@ public class PointImpl extends AbstractFigure implements Point {
     /**
      * Abscissa coordinate of a point.
      */
-    private double abscissa;
+    private final double abscissa;
 
     /**
      * Ordinate coordinate of a point.
      */
-    private double ordinate;
-
-    /**
-     * Default constructor.
-     */
-    public PointImpl() {
-    }
+    private final double ordinate;
 
     /**
      * Constructor.
@@ -44,7 +38,6 @@ public class PointImpl extends AbstractFigure implements Point {
      * @param ordinate the ordinate for a new point.
      */
     public PointImpl(double abscissa, double ordinate) {
-        this();
         this.abscissa = abscissa;
         this.ordinate = ordinate;
     }
@@ -132,16 +125,6 @@ public class PointImpl extends AbstractFigure implements Point {
     }
 
     /**
-     * Sets a new abscissa coordinate for a point.
-     *
-     * @param abscissa the new abscissa coordinate.
-     */
-    @Override
-    public void setAbscissa(double abscissa) {
-        this.abscissa = abscissa;
-    }
-
-    /**
      * Returns a point ordinate.
      *
      * @return the point ordinate.
@@ -149,16 +132,6 @@ public class PointImpl extends AbstractFigure implements Point {
     @Override
     public double getOrdinate() {
         return this.ordinate;
-    }
-
-    /**
-     * Sets a new ordinate coordinate for a point.
-     *
-     * @param ordinate the new ordinate coordinate.
-     */
-    @Override
-    public void setOrdinate(double ordinate) {
-        this.ordinate = ordinate;
     }
 
     /**

@@ -3,6 +3,19 @@ package com.salimov.yurii.incamp.figure;
 /**
  * The interface describes a set of methods
  * for working with a Rectangle geometric figures.
+ * <pre>
+ *               w i d t h
+ *       A |←----------------→| B
+ *      -- * * * * * * * * * * *
+ *   h  ↑  * * * * * * * * * * *
+ *   e  |  * * * * * * * * * * *
+ *   i  |  * * * * * * * * * * *
+ *   g  |  * * * * * * * * * * *
+ *   h  |  * * * * * * * * * * *
+ *   t  ↓  * * * * * * * * * * *
+ *      -- * * * * * * * * * * *
+ *       C                       D
+ * </pre>
  *
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
@@ -17,25 +30,11 @@ public interface Rectangle extends Figure {
     double getWidth();
 
     /**
-     * Sets a new width for a rectangle.
-     *
-     * @param width the new rectangle width.
-     */
-    void setWidth(double width);
-
-    /**
      * Returns a rectangle height.
      *
      * @return the rectangle height.
      */
     double getHeight();
-
-    /**
-     * Sets a new height for a rectangle.
-     *
-     * @param height the new rectangle height.
-     */
-    void setHeight(double height);
 
     /**
      * Calculates and returns a point A of a rectangle.
