@@ -10,7 +10,7 @@ package com.salimov.yurii.incamp.figure;
 public interface Drawable {
 
     /**
-     * Draws a object.
+     * Draws the object.
      */
     void draw();
 }

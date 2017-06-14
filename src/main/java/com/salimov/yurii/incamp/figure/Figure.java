@@ -10,21 +10,21 @@ package com.salimov.yurii.incamp.figure;
 public interface Figure extends Drawable {
 
     /**
-     * Calculates and returns a figure area.
+     * Calculates and returns the figure area.
      *
      * @return the figure area.
      */
     double getArea();
 
     /**
-     * Calculates and returns a figure perimeter.
+     * Calculates and returns the figure perimeter.
      *
      * @return the figure perimeter.
      */
     double getPerimeter();
 
     /**
-     * Returns a figure name.
+     * Returns the figure name.
      *
      * @return the figure name
      */

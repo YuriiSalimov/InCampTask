@@ -17,7 +17,7 @@ public interface Analyzer {
      * Returns a figure with a maximum area.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum area.
+     * @return the figure with a maximum area.
      */
     Figure getWithMaxArea(List<Figure> figures);
 
@@ -26,7 +26,7 @@ public interface Analyzer {
      *
      * @param first the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a maximum area.
+     * @return the figure with a maximum area.
      */
     Figure getWithMaxArea(Figure first, Figure second);
 
@@ -34,7 +34,7 @@ public interface Analyzer {
      * Returns a figure with a minimum area.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a minimum area.
+     * @return the figure with a minimum area.
      */
     Figure getWithMinArea(List<Figure> figures);
 
@@ -43,7 +43,7 @@ public interface Analyzer {
      *
      * @param first the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a minimum area.
+     * @return the figure with a minimum area.
      */
     Figure getWithMinArea(Figure first, Figure second);
 
@@ -51,7 +51,7 @@ public interface Analyzer {
      * Returns a figure with a maximum perimeter.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
      */
     Figure getWithMaxPerimeter(List<Figure> figures);
 
@@ -60,7 +60,7 @@ public interface Analyzer {
      *
      * @param first the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
      */
     Figure getWithMaxPerimeter(Figure first, Figure second);
 
@@ -68,7 +68,7 @@ public interface Analyzer {
      * Returns a figure with a minimum perimeter.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
      */
     Figure getWithMinPerimeter(List<Figure> figures);
 
@@ -77,7 +77,7 @@ public interface Analyzer {
      *
      * @param first the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a minimum perimeter.
+     * @return the figure with a minimum perimeter.
      */
     Figure getWithMinPerimeter(Figure first, Figure second);
 }

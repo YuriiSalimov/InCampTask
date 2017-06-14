@@ -11,16 +11,20 @@ import java.util.List;
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
  * @version 1.0
  */
-public class FigureAnalyzer implements Analyzer {
+public final class FigureAnalyzer implements Analyzer {
 
     /**
      * Returns a figure with a maximum area.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum area.
+     * @return the figure with a maximum area.
+     * @throws IllegalArgumentException if the incoming figures is null or empty.
      */
     @Override
-    public Figure getWithMaxArea(List<Figure> figures) {
+    public Figure getWithMaxArea(final List<Figure> figures) throws IllegalArgumentException {
+        if (figures == null || figures.isEmpty()) {
+            throw new IllegalArgumentException("Incoming figures list is null or empty!");
+        }
         Figure result = figures.get(0);
         for (Figure figure : figures) {
             result = getWithMaxArea(result, figure);
@@ -33,10 +37,10 @@ public class FigureAnalyzer implements Analyzer {
      *
      * @param first  the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a maximum area.
+     * @return the figure with a maximum area.
      */
     @Override
-    public Figure getWithMaxArea(Figure first, Figure second) {
+    public Figure getWithMaxArea(final Figure first, final Figure second) {
         return areaAnalyzer(first, second) ? first : second;
     }
 
@@ -44,10 +48,14 @@ public class FigureAnalyzer implements Analyzer {
      * Returns a figure with a minimum area.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a minimum area.
+     * @return the figure with a minimum area.
+     * @throws IllegalArgumentException if the incoming figures is null or empty.
      */
     @Override
-    public Figure getWithMinArea(List<Figure> figures) {
+    public Figure getWithMinArea(final List<Figure> figures) throws IllegalArgumentException {
+        if (figures == null || figures.isEmpty()) {
+            throw new IllegalArgumentException("Incoming figures list is null or empty!");
+        }
         Figure result = figures.get(0);
         for (Figure figure : figures) {
             result = getWithMinArea(result, figure);
@@ -60,10 +68,10 @@ public class FigureAnalyzer implements Analyzer {
      *
      * @param first  the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a minimum area.
+     * @return the figure with a minimum area.
      */
     @Override
-    public Figure getWithMinArea(Figure first, Figure second) {
+    public Figure getWithMinArea(final Figure first, final Figure second) {
         return areaAnalyzer(first, second) ? second : first;
     }
 
@@ -71,10 +79,14 @@ public class FigureAnalyzer implements Analyzer {
      * Returns a figure with a maximum perimeter.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
+     * @throws IllegalArgumentException if the incoming figures is null or empty.
      */
     @Override
-    public Figure getWithMaxPerimeter(List<Figure> figures) {
+    public Figure getWithMaxPerimeter(final List<Figure> figures) throws IllegalArgumentException {
+        if (figures == null || figures.isEmpty()) {
+            throw new IllegalArgumentException("Incoming figures list is null or empty!");
+        }
         Figure result = figures.get(0);
         for (Figure figure : figures) {
             result = getWithMaxPerimeter(result, figure);
@@ -87,10 +99,10 @@ public class FigureAnalyzer implements Analyzer {
      *
      * @param first  the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
      */
     @Override
-    public Figure getWithMaxPerimeter(Figure first, Figure second) {
+    public Figure getWithMaxPerimeter(final Figure first, final Figure second) {
         return perimeterAnalyzer(first, second) ? first : second;
     }
 
@@ -98,9 +110,13 @@ public class FigureAnalyzer implements Analyzer {
      * Returns a figure with a minimum perimeter.
      *
      * @param figures the figure list to analyze.
-     * @return a figure with a maximum perimeter.
+     * @return the figure with a maximum perimeter.
+     * @throws IllegalArgumentException if the incoming figures is null or empty.
      */
-    public Figure getWithMinPerimeter(List<Figure> figures) {
+    public Figure getWithMinPerimeter(final List<Figure> figures) throws IllegalArgumentException {
+        if (figures == null || figures.isEmpty()) {
+            throw new IllegalArgumentException("Incoming figures list is null or empty!");
+        }
         Figure result = figures.get(0);
         for (Figure figure : figures) {
             result = getWithMinPerimeter(result, figure);
@@ -113,10 +129,10 @@ public class FigureAnalyzer implements Analyzer {
      *
      * @param first  the first figure to analyze.
      * @param second the second figure to analyze.
-     * @return a figure with a minimum perimeter.
+     * @return the figure with a minimum perimeter.
      */
     @Override
-    public Figure getWithMinPerimeter(Figure first, Figure second) {
+    public Figure getWithMinPerimeter(final Figure first, final Figure second) {
         return perimeterAnalyzer(first, second) ? second : first;
     }
 
@@ -127,8 +143,13 @@ public class FigureAnalyzer implements Analyzer {
      * @param less the geometric figure with less area.
      * @return true if area of a "more" figure is more
      * of area of a "less" figure, false otherwise.
+     * @throws IllegalArgumentException if one of the incoming figures is null.
      */
-    private static boolean areaAnalyzer(Figure more, Figure less) {
+    private static boolean areaAnalyzer(final Figure more, final Figure less)
+            throws IllegalArgumentException {
+        if (more == null || less == null) {
+            throw new IllegalArgumentException("One of the incoming figures is null!");
+        }
         return (more.getArea() > less.getArea());
     }
 
@@ -139,8 +160,13 @@ public class FigureAnalyzer implements Analyzer {
      * @param less the geometric figure with less perimeter.
      * @return true if perimeter of a "more" figure is more
      * of perimeter of a "less" figure, false otherwise.
+     * @throws IllegalArgumentException if one of the incoming figures is null.
      */
-    private static boolean perimeterAnalyzer(Figure more, Figure less) {
+    private static boolean perimeterAnalyzer(final Figure more, final Figure less)
+            throws IllegalArgumentException {
+        if (more == null || less == null) {
+            throw new IllegalArgumentException("One of the incoming figures is null!");
+        }
         return (more.getPerimeter() > less.getPerimeter());
     }
 }

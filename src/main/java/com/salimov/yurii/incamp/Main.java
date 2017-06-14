@@ -23,14 +23,9 @@ public class Main {
      */
     private final static int MAX_COORDINATE = 25;
 
-    /**
-     * Main method.
-     *
-     * @param args a incoming parameters.
-     */
     public static void main(String[] args) {
         Generator generator = getGenerator();
-        List<Figure> figures = generator.getFigures(FIGURES_NUMBER);
+        List<Figure> figures = generator.generateFigures(FIGURES_NUMBER);
 
         Printer printer = getPrinter();
         printer.printlnAll(figures);
@@ -45,7 +40,7 @@ public class Main {
      * Creates and returns a new Generator instance
      * for creating a geometric figures.
      *
-     * @return a new Generator.
+     * @return the new Generator.
      */
     private static Generator getGenerator() {
         return new FigureGenerator(MAX_COORDINATE);
@@ -55,7 +50,7 @@ public class Main {
      * Creates and returns a new Printer instance
      * for printing a geometric figures in the console.
      *
-     * @return a new Printer.
+     * @return the new Printer.
      */
     private static Printer getPrinter() {
         Analyzer analyzer = getAnalyzer();
@@ -66,7 +61,7 @@ public class Main {
      * Creates and returns a new Printer instance
      * for analyzing an incoming figures.
      *
-     * @return a new Analyzer.
+     * @return the new Analyzer.
      */
     private static Analyzer getAnalyzer() {
         return new FigureAnalyzer();

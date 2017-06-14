@@ -15,28 +15,28 @@ import java.util.List;
 public interface Printer {
 
     /**
-     * Prints a incoming geometric figures in the console.
+     * Prints the incoming geometric figures in the console.
      *
      * @param figures the figure list to print.
      */
     void printlnAll(List<Figure> figures);
 
     /**
-     * Prints a incoming geometric figure in the console.
+     * Prints the incoming geometric figure in the console.
      *
      * @param figure the figure to print.
      */
     void println(Figure figure);
 
     /**
-     * Prints a geometric figures with a maximum area.
+     * Prints the incoming geometric figures with a maximum area.
      *
      * @param figures the figure list to analyze.
      */
     void printlnWithMaxArea(List<Figure> figures);
 
     /**
-     * Prints a geometric figures with a minimum area.
+     * Prints the incoming geometric figures with a minimum area.
      *
      * @param figures the figure list to analyze.
      */
@@ -50,35 +50,35 @@ public interface Printer {
     void printlnWithMaxPerimeter(List<Figure> figures);
 
     /**
-     * Prints a geometric figures with a minimum perimeter.
+     * Prints the incoming geometric figures with a minimum perimeter.
      *
      * @param figures the figure list to analyze.
      */
     void printlnWithMinPerimeter(List<Figure> figures);
 
     /**
-     * Draws a incoming geometric figures in the console.
+     * Draws the incoming incoming geometric figures in the console.
      *
      * @param figures the figure list to draw.
      */
     void drawAll(List<Drawable> figures);
 
     /**
-     * Draws a incoming geometric figure in the console.
+     * Draws the incoming geometric figure in the console.
      *
      * @param figure the figure to draw.
      */
     void draw(Drawable figure);
 
     /**
-     * Prints and draws a incoming geometric figures in the console.
+     * Prints and draws the incoming geometric figures in the console.
      *
      * @param figures the figure list to print and draw.
      */
     void printAndDrawAll(List<Figure> figures);
 
     /**
-     * Prints and draws a incoming geometric figure in the console.
+     * Prints and draws the incoming geometric figure in the console.
      *
      * @param figure the figure to print and draw.
      */
