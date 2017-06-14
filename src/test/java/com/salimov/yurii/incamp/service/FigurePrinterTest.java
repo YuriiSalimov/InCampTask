@@ -1,12 +1,12 @@
 package com.salimov.yurii.incamp.service;
 
+import com.salimov.yurii.incamp.figure.Drawable;
 import com.salimov.yurii.incamp.figure.Figure;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -14,80 +14,164 @@ import java.util.Random;
  */
 public class FigurePrinterTest {
 
-    private static Printer printer;
+    private final static int FIGURE_NUMBER = 10;
+    private final static int MAX_COORDINATE = 10;
+
+    private static FigurePrinter printer;
     private static List<Figure> figures;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        Analyzer analyzer = new FigureAnalyzer();
+    public static void beforeClass() {
+        final Generator generator = new FigureGenerator(MAX_COORDINATE);
+        figures = generator.generateFigures(FIGURE_NUMBER);
+        final Analyzer analyzer = new FigureAnalyzer();
         printer = new FigurePrinter(analyzer);
-
-        int maxCoordinate = 10;
-        int figureNumber = 10;
-        Generator generator = new FigureGenerator(maxCoordinate);
-        figures = generator.getFigures(figureNumber);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void constructorNullParameter() throws Exception {
+    public void whenSetNullAnalyzerInConstructorThenThrowIllegalArgumentException() {
         new FigurePrinter(null);
     }
 
     @Test
-    public void printlnAll() throws Exception {
+    public void whenPrintlnAllThenDoIt() {
         printer.printlnAll(figures);
     }
 
-    @Test
-    public void println() throws Exception {
-        Figure figure = getRandomFigure();
-        printer.println(figure);
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnAllNullListThenThrownIllegalArgumentException() {
+        printer.printlnAll(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnAllEmptyListThenThrownIllegalArgumentException() {
+        printer.printlnAll(new ArrayList<>());
     }
 
     @Test
-    public void printlnWithMaxArea() throws Exception {
+    public void whenPrintlnThenDoIt() {
+        for (Figure figure : figures) {
+            printer.println(figure);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnNullFigureThenThrownIllegalArgumentException() {
+        printer.println(null);
+    }
+
+    @Test
+    public void whenPrintlnWithMaxAreaThenDoIt() {
         printer.printlnWithMaxArea(figures);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnNullFiguresWithMaxAreaThenThrownIllegalArgumentException() {
+        printer.printlnWithMaxArea(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnEmptyFiguresWithMaxAreaThenThrownIllegalArgumentException() {
+        printer.printlnWithMaxArea(new ArrayList<>());
+    }
+
     @Test
-    public void printlnWithMinArea() throws Exception {
+    public void whenPrintlnWithMinAreaThenDoIt() {
         printer.printlnWithMinArea(figures);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnNullFiguresWithMinAreaThenThrownIllegalArgumentException() {
+        printer.printlnWithMinArea(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnEmptyFiguresWithMinAreaThenThrownIllegalArgumentException() {
+        printer.printlnWithMinArea(new ArrayList<>());
+    }
+
     @Test
-    public void printlnWithMaxPerimeter() throws Exception {
+    public void whenPrintlnWithMaxPerimeterThenDoIt() {
         printer.printlnWithMaxPerimeter(figures);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnNullFiguresWithMaxPerimeterThenThrownIllegalArgumentException() {
+        printer.printlnWithMaxPerimeter(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnEmptyFiguresWithMaxPerimeterThenThrownIllegalArgumentException() {
+        printer.printlnWithMaxPerimeter(new ArrayList<>());
+    }
+
     @Test
-    public void printlnWithMinPerimeter() throws Exception {
+    public void whenPrintlnWithMinPerimeterThenDoIt() {
         printer.printlnWithMinPerimeter(figures);
     }
 
-    @Test
-    public void drawAll() throws Exception {
-        printer.drawAll(new ArrayList<>(figures));
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnNullFiguresWithMinPerimeterThenThrownIllegalArgumentException() {
+        printer.printlnWithMinPerimeter(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintlnEmptyFiguresWithMinPerimeterThenThrownIllegalArgumentException() {
+        printer.printlnWithMinPerimeter(new ArrayList<>());
     }
 
     @Test
-    public void draw() throws Exception {
-        Figure figure = getRandomFigure();
-        printer.draw(figure);
+    public void whenDrawAllThenDoIt() {
+        final List<Drawable> drawables = new ArrayList<>(figures);
+        printer.drawAll(drawables);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenDrawAllNullListThenThrownIllegalArgumentException() {
+        printer.drawAll(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenDrawAllEmptyListThenThrownIllegalArgumentException() {
+        printer.drawAll(new ArrayList<>());
     }
 
     @Test
-    public void printAndDraw() throws Exception {
-        Figure figure = getRandomFigure();
-        printer.printAndDraw(figure);
+    public void whenDrawThenDoIt() {
+        for (Drawable drawable : figures) {
+            printer.draw(drawable);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenDrawNullThenThrownIllegalArgumentException() {
+        printer.draw(null);
     }
 
     @Test
-    public void printAndDrawAll() throws Exception {
+    public void whenPrintAndDrawAllThenDoIt() {
         printer.printAndDrawAll(figures);
     }
 
-    private Figure getRandomFigure() {
-        Random random = new Random();
-        return figures.get(random.nextInt(figures.size()));
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintAndDrawAllNullListThenThrownIllegalArgumentException() {
+        printer.printAndDrawAll(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintAndDrawAllEmptyListThenThrownIllegalArgumentException() {
+        printer.printAndDrawAll(new ArrayList<>());
+    }
+
+    @Test
+    public void whenPrintAndDrawThenDoIt() {
+        for (Figure figure : figures) {
+            printer.printAndDraw(figure);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPrintAndDrawNullThenThrownIllegalArgumentException() {
+        printer.printAndDraw(null);
     }
 }

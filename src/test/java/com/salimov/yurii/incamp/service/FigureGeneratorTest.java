@@ -1,11 +1,17 @@
 package com.salimov.yurii.incamp.service;
 
-import com.salimov.yurii.incamp.figure.*;
+import com.salimov.yurii.incamp.figure.Figure;
+import com.salimov.yurii.incamp.figure.circle.Circle;
+import com.salimov.yurii.incamp.figure.point.Point;
+import com.salimov.yurii.incamp.figure.rectangle.Rectangle;
+import com.salimov.yurii.incamp.figure.triangle.Triangle;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * @author Yurii Salimov (yuriy.alex.salimov@gmail.com)
@@ -13,77 +19,66 @@ import java.util.List;
  */
 public class FigureGeneratorTest {
 
+    private final static int FIGURE_NUMBER = 10;
     private final static int MAX_COORDINATE = 10;
-    private final static int FIGURE_NUMBER = 100;
 
     private static FigureGenerator generator;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         generator = new FigureGenerator(MAX_COORDINATE);
-        Assert.assertNotNull(generator);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenSetNegativeCoordinateInConstructorThenThrowIllegalArgumentException() {
+        new FigureGenerator(-10);
     }
 
     @Test
-    public void createFigures() throws Exception {
-        List<Figure> figures = generator.getFigures(FIGURE_NUMBER);
-        Assert.assertTrue(figures.size() == FIGURE_NUMBER);
+    public void whenGenerateFiguresThenReturnNotEmptyList() {
+        final List<Figure> figures  = generator.generateFigures(FIGURE_NUMBER);
+        assertFalse(figures.isEmpty());
     }
 
     @Test
-    public void createFiguresWithNegativeNumber() {
-        Assert.assertTrue(generator.getFigures(-FIGURE_NUMBER).isEmpty());
+    public void whenGenerateFiguresThenReturnListWithNotNullFigures() {
+        final List<Figure> figures  = generator.generateFigures(FIGURE_NUMBER);
+        figures.forEach(Assert::assertNotNull);
     }
 
     @Test
-    public void createCircle() throws Exception {
-        Circle circle = generator.getCircle();
-        Assert.assertNotNull(circle);
+    public void whenGenerateFiguresWithNegativeNumberThenReturnEmptyList() {
+        final List<Figure> figures  = generator.generateFigures(-FIGURE_NUMBER);
+        assertTrue(figures.isEmpty());
     }
 
     @Test
-    public void createPoint() throws Exception {
-        Point point = generator.getPoint();
-        Assert.assertNotNull(point);
+    public void whenGenerateCircleThenReturnNoNull() {
+        final Circle circle = generator.generateCircle();
+        assertNotNull(circle);
     }
 
     @Test
-    public void createRectangle() throws Exception {
-        Rectangle rectangle = generator.getRectangle();
-        Assert.assertNotNull(rectangle);
+    public void whenGeneratePointThenReturnNoNull() {
+        final Point point = generator.generatePoint();
+        assertNotNull(point);
     }
 
     @Test
-    public void createTriangle() throws Exception {
-        Triangle triangle;
-        for (int i = 0; i < FIGURE_NUMBER; i++) {
-            triangle = generator.getTriangle();
-            Assert.assertNotNull(triangle);
-            Assert.assertTrue(triangle.isTriangle());
-        }
+    public void whenGenerateRectangleThenReturnNoNull() {
+        final Rectangle rectangle = generator.generateRectangle();
+        assertNotNull(rectangle);
     }
 
     @Test
-    public void getMaxCoordinate() throws Exception {
-        Assert.assertTrue(generator.getMaxCoordinate() >= 0);
+    public void whenGenerateTriangleThenReturnNoNull() {
+        final Triangle triangle = generator.generateTriangle();
+        assertNotNull(triangle);
     }
 
     @Test
-    public void setMaxCoordinate() throws Exception {
-        generator.setMaxCoordinate(MAX_COORDINATE);
-        Assert.assertTrue(generator.getMaxCoordinate() == MAX_COORDINATE);
-    }
-
-    @Test
-    public void whenSetNegativeMaxCoordinateThenGetZero() throws Exception {
-        generator.setMaxCoordinate(-MAX_COORDINATE);
-        Assert.assertTrue(generator.getMaxCoordinate() == 0);
-        generator.setMaxCoordinate(MAX_COORDINATE);
-    }
-
-    @Test
-    public void defaultConstructor() throws Exception {
-        Generator generator = new FigureGenerator();
-        Assert.assertNotNull(generator);
+    public void wnenCallDefaultConstructorThenReturnNewGenerator() {
+        final Generator generator = new FigureGenerator();
+        assertNotNull(generator);
     }
 }
