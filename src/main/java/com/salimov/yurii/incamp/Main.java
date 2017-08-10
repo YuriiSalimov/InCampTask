@@ -24,8 +24,8 @@ public class Main {
     private final static int MAX_COORDINATE = 25;
 
     public static void main(String[] args) {
-        Generator generator = getGenerator();
-        List<Figure> figures = generator.generateFigures(FIGURES_NUMBER);
+        final Generator generator = getGenerator();
+        final List<Figure> figures = generator.generateFigures(FIGURES_NUMBER);
 
         Printer printer = getPrinter();
         printer.printlnAll(figures);
@@ -53,7 +53,7 @@ public class Main {
      * @return the new Printer.
      */
     private static Printer getPrinter() {
-        Analyzer analyzer = getAnalyzer();
+        final Analyzer analyzer = getAnalyzer();
         return new FigurePrinter(analyzer);
     }
 
