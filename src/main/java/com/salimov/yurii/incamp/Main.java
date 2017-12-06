@@ -27,7 +27,7 @@ public class Main {
         final Generator generator = getGenerator();
         final List<Figure> figures = generator.generateFigures(FIGURES_NUMBER);
 
-        Printer printer = getPrinter();
+        final Printer printer = getPrinter();
         printer.printlnAll(figures);
         printer.printlnWithMaxArea(figures);
         printer.printlnWithMinArea(figures);
